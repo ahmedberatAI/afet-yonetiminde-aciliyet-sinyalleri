@@ -1,0 +1,163 @@
+{
+  "model_dir": "models/exp3_silver_then_gold_v3_exgold/final",
+  "input": "data/processed/emergency_geolocated_96k.csv",
+  "output": "data/predictions/need_predictions_geolocated_v2_final.csv",
+  "dedup_by_id": true,
+  "rows_before": 96071,
+  "rows_after": 63180,
+  "text_col_used": "tweet_clean",
+  "labels": [
+    "arama_kurtarma",
+    "saglik",
+    "barinma",
+    "gida_su",
+    "altyapi",
+    "guvenlik",
+    "lojistik",
+    "psikolojik",
+    "bilgi_paylasimi"
+  ],
+  "thresholds_per_label": {
+    "arama_kurtarma": 0.5999999046325684,
+    "saglik": 0.8999998569488525,
+    "barinma": 0.929999828338623,
+    "gida_su": 0.13999998569488525,
+    "altyapi": 0.729999840259552,
+    "guvenlik": 0.7399998903274536,
+    "lojistik": 0.9099998474121094,
+    "psikolojik": 0.8599998354911804,
+    "bilgi_paylasimi": 0.8699998259544373
+  },
+  "max_length": 192,
+  "batch_size": 128,
+  "pred_positives": {
+    "arama_kurtarma": 39694,
+    "saglik": 2030,
+    "barinma": 3869,
+    "gida_su": 3469,
+    "altyapi": 850,
+    "guvenlik": 214,
+    "lojistik": 9246,
+    "psikolojik": 268,
+    "bilgi_paylasimi": 3374
+  },
+  "selected_experiment_key": "exp3_silver_then_gold_v3_exgold",
+  "selected_tag": "v2_final_leakfree_exp3",
+  "thresholds_json": "models/exp3_silver_then_gold_v3_exgold/thresholds_cv.json",
+  "threshold_source": "cv",
+  "threshold_type": "oof_global",
+  "threshold_meta_json": "models/exp3_silver_then_gold_v3_exgold/threshold_tuning_cv_meta.json",
+  "threshold_global_note": "The `threshold_global` field is ONLY a fallback in predict_need_classifier.py; it was NOT applied to any label. Effective thresholds are the per-label values above, sourced from the CV-tuned thresholds_cv.json (threshold_source='cv', threshold_type='oof_global').",
+  "duplicate_rows_removed": 32891,
+  "selection_artifact": "models/final/selection.json",
+  "comparison_artifact": {
+    "md": "data/analysis/experiment_comparison_v3_leakfree.md",
+    "json": "data/analysis/experiment_comparison_v3_leakfree.json",
+    "csv": "data/analysis/experiment_comparison_v3_leakfree.csv"
+  },
+  "error_analysis_artifact": {
+    "md": "data/analysis/error_analysis_v2_leakfree.md",
+    "json": "data/analysis/error_analysis_v2_leakfree.json",
+    "fp_csv": "data/analysis/error_analysis_v2_leakfree.fp.csv",
+    "fn_csv": "data/analysis/error_analysis_v2_leakfree.fn.csv",
+    "slices_csv": "data/analysis/error_analysis_v2_leakfree.slices.csv"
+  },
+  "content_overlap_audit_artifact": {
+    "md": "data/analysis/content_overlap_audit_v2_leakfree.md",
+    "json": "data/analysis/content_overlap_audit_v2_leakfree.json",
+    "totals": {
+      "gold_rows": 1934,
+      "exact_overlap": 407,
+      "near_dup_j085": 621,
+      "test_exact_overlap": 35,
+      "test_near_dup_j085": 59,
+      "test_rows": 194
+    },
+    "note": "id-level leak closed (0/1934), but normalized-text overlap remains: ~18% of test rows exact-match silver, ~30% near-dup at J>=0.85. Residual risk, documented."
+  },
+  "generated_at": "2026-04-21T18:34:24+00:00",
+  "metadata_finalized_by": {
+    "script": "scripts/finalize_prediction_metadata.py",
+    "predict_script": "scripts/predict_need_classifier.py",
+    "predict_script_sha1_head": "62b5a3df7c4b81db5b491a6211f39dda39afff64"
+  },
+  "canonical": true,
+  "supersedes": [
+    "data/predictions/need_predictions_geolocated_63k.csv",
+    "data/predictions/need_predictions_geolocated_gold_combined_weighted.csv",
+    "data/predictions/need_predictions_geolocated_v1_gold_combined_weighted.csv"
+  ],
+  "threshold_global_fallback": 0.5,
+  "prediction_columns": [
+    "pred_arama_kurtarma",
+    "pred_saglik",
+    "pred_barinma",
+    "pred_gida_su",
+    "pred_altyapi",
+    "pred_guvenlik",
+    "pred_lojistik",
+    "pred_psikolojik",
+    "pred_bilgi_paylasimi"
+  ],
+  "probability_columns": [
+    "prob_arama_kurtarma",
+    "prob_saglik",
+    "prob_barinma",
+    "prob_gida_su",
+    "prob_altyapi",
+    "prob_guvenlik",
+    "prob_lojistik",
+    "prob_psikolojik",
+    "prob_bilgi_paylasimi"
+  ],
+  "label_to_pred_column": {
+    "arama_kurtarma": "pred_arama_kurtarma",
+    "saglik": "pred_saglik",
+    "barinma": "pred_barinma",
+    "gida_su": "pred_gida_su",
+    "altyapi": "pred_altyapi",
+    "guvenlik": "pred_guvenlik",
+    "lojistik": "pred_lojistik",
+    "psikolojik": "pred_psikolojik",
+    "bilgi_paylasimi": "pred_bilgi_paylasimi"
+  },
+  "label_to_prob_column": {
+    "arama_kurtarma": "prob_arama_kurtarma",
+    "saglik": "prob_saglik",
+    "barinma": "prob_barinma",
+    "gida_su": "prob_gida_su",
+    "altyapi": "prob_altyapi",
+    "guvenlik": "prob_guvenlik",
+    "lojistik": "prob_lojistik",
+    "psikolojik": "prob_psikolojik",
+    "bilgi_paylasimi": "prob_bilgi_paylasimi"
+  },
+  "auxiliary_columns": {
+    "pred_label_count": "int count of labels where pred==1 in this row",
+    "pred_any_need": "1 if any label pred==1 else 0 (i.e., pred_label_count >= 1)"
+  },
+  "identifier_columns": [
+    "id"
+  ],
+  "metadata_columns": [
+    "created_at",
+    "date",
+    "time"
+  ],
+  "text_columns": [
+    "tweet",
+    "tweet_clean"
+  ],
+  "location_columns": [
+    "neighborhood",
+    "district",
+    "province"
+  ],
+  "urgency_columns": [
+    "urgency_score"
+  ],
+  "row_count": 63180,
+  "schema_note": "Each label has exactly two columns: prob_<label> (sigmoid probability in [0,1]) and pred_<label> (1 if prob_<label> >= thresholds_per_label[<label>], else 0). pred_any_need and pred_label_count are derived. No hidden global threshold is applied; threshold_global_fallback is unused for this output.",
+  "schema_finalized_by": "scripts/prediction_qa_v2_final.py",
+  "schema_finalized_at": "2026-04-21T18:52:30+00:00"
+}

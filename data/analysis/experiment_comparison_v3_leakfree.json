@@ -1,0 +1,342 @@
+{
+  "task": "need_classification_experiment_comparison_v3_leakfree",
+  "scope": "step7",
+  "supersedes": "data/analysis/experiment_comparison_v2.{md,csv,json}",
+  "test_csv": "data/modeling/need_classification_gold_combined/test.csv",
+  "val_csv": "data/modeling/need_classification_gold_combined/val.csv",
+  "rows_test": 194,
+  "rows_val": 193,
+  "labels": [
+    "arama_kurtarma",
+    "saglik",
+    "barinma",
+    "gida_su",
+    "altyapi",
+    "guvenlik",
+    "lojistik",
+    "psikolojik",
+    "bilgi_paylasimi"
+  ],
+  "rare_labels": [
+    "altyapi",
+    "guvenlik",
+    "psikolojik"
+  ],
+  "experiments": [
+    {
+      "experiment": "exp1_gold_v2_bce",
+      "model_dir": "models/exp1_gold_v2_bce/final",
+      "config_yaml": "data/modeling/experiments/exp1_gold_v2_bce.yaml",
+      "base_model": "dbmdz/bert-base-turkish-cased",
+      "training": "Gold-only BCE (no pos_weight), LR=2e-5, 3 epochs, BS=16",
+      "pos_weight_used": false,
+      "silver_provenance": "none (trained directly from BERTurk base, no silver pretraining)",
+      "leak_free": true,
+      "test_csv": "data/modeling/need_classification_gold_combined/test.csv",
+      "val_csv": "data/modeling/need_classification_gold_combined/val.csv",
+      "rows_test": 194,
+      "rows_val": 193,
+      "labels": [
+        "arama_kurtarma",
+        "saglik",
+        "barinma",
+        "gida_su",
+        "altyapi",
+        "guvenlik",
+        "lojistik",
+        "psikolojik",
+        "bilgi_paylasimi"
+      ],
+      "test": {
+        "f1_micro": 0.7324561403508771,
+        "f1_macro": 0.413680259803052,
+        "precision_micro": 0.6733870967741935,
+        "recall_micro": 0.8028846153846154,
+        "f1_per_label": {
+          "arama_kurtarma": 0.9279279279279279,
+          "saglik": 0.0,
+          "barinma": 0.7692307692307693,
+          "gida_su": 0.5384615384615384,
+          "altyapi": 0.0,
+          "guvenlik": 0.06896551724137931,
+          "lojistik": 0.6585365853658537,
+          "psikolojik": 0.0,
+          "bilgi_paylasimi": 0.76
+        }
+      },
+      "val": {
+        "f1_micro": 0.7757847533632287,
+        "f1_macro": 0.4308016085704662,
+        "precision_micro": 0.7061224489795919,
+        "recall_micro": 0.8606965174129353,
+        "f1_per_label": {
+          "arama_kurtarma": 0.9147982062780269,
+          "saglik": 0.0,
+          "barinma": 0.9285714285714286,
+          "gida_su": 0.23529411764705882,
+          "altyapi": 0.0,
+          "guvenlik": 0.16666666666666666,
+          "lojistik": 0.7333333333333333,
+          "psikolojik": 0.0,
+          "bilgi_paylasimi": 0.8985507246376812
+        }
+      },
+      "thresholds_per_label": {
+        "arama_kurtarma": 0.5999999046325684,
+        "saglik": 0.11999998986721039,
+        "barinma": 0.43999993801116943,
+        "gida_su": 0.23999996483325958,
+        "altyapi": 0.07999999821186066,
+        "guvenlik": 0.05999999865889549,
+        "lojistik": 0.21999995410442352,
+        "psikolojik": 0.1799999624490738,
+        "bilgi_paylasimi": 0.35999995470046997
+      },
+      "threshold_source": "models/exp1_gold_v2_bce/thresholds_cv.json",
+      "threshold_meta_file": "models/exp1_gold_v2_bce/threshold_tuning_cv_meta.json",
+      "threshold_type": "cv",
+      "threshold_strategy": "oof_global",
+      "threshold_k_folds": 5,
+      "threshold_smoothing_alpha": 1.0,
+      "pool_label_positives": {
+        "arama_kurtarma": 990,
+        "saglik": 43,
+        "barinma": 161,
+        "gida_su": 100,
+        "altyapi": 20,
+        "guvenlik": 35,
+        "lojistik": 265,
+        "psikolojik": 10,
+        "bilgi_paylasimi": 235
+      },
+      "rare_label_f1_test": {
+        "altyapi": 0.0,
+        "guvenlik": 0.06896551724137931,
+        "psikolojik": 0.0
+      },
+      "rare_label_f1_val": {
+        "altyapi": 0.0,
+        "guvenlik": 0.16666666666666666,
+        "psikolojik": 0.0
+      },
+      "notes": "Gold-only baseline with vanilla BCE. No silver pretraining, so the silver-leakage issue does not apply. Rare labels (saglik, altyapi, psikolojik) collapse to F1=0 on test — expected failure mode without pos_weight."
+    },
+    {
+      "experiment": "exp2_gold_v2_posw",
+      "model_dir": "models/exp2_gold_v2_posw/final",
+      "config_yaml": "data/modeling/experiments/exp2_gold_v2_posw.yaml",
+      "base_model": "dbmdz/bert-base-turkish-cased",
+      "training": "Gold-only + pos_weight=neg/pos (clipped [1,50]), LR=2e-5, 3 epochs, BS=16",
+      "pos_weight_used": true,
+      "silver_provenance": "none (trained directly from BERTurk base, no silver pretraining)",
+      "leak_free": true,
+      "test_csv": "data/modeling/need_classification_gold_combined/test.csv",
+      "val_csv": "data/modeling/need_classification_gold_combined/val.csv",
+      "rows_test": 194,
+      "rows_val": 193,
+      "labels": [
+        "arama_kurtarma",
+        "saglik",
+        "barinma",
+        "gida_su",
+        "altyapi",
+        "guvenlik",
+        "lojistik",
+        "psikolojik",
+        "bilgi_paylasimi"
+      ],
+      "test": {
+        "f1_micro": 0.7297921478060047,
+        "f1_macro": 0.5560202367033487,
+        "precision_micro": 0.7022222222222222,
+        "recall_micro": 0.7596153846153846,
+        "f1_per_label": {
+          "arama_kurtarma": 0.7792207792207793,
+          "saglik": 0.7272727272727273,
+          "barinma": 0.7096774193548387,
+          "gida_su": 0.7142857142857143,
+          "altyapi": 0.0,
+          "guvenlik": 0.6666666666666666,
+          "lojistik": 0.6470588235294118,
+          "psikolojik": 0.0,
+          "bilgi_paylasimi": 0.76
+        }
+      },
+      "val": {
+        "f1_micro": 0.7469879518072289,
+        "f1_macro": 0.5082742691323757,
+        "precision_micro": 0.7242990654205608,
+        "recall_micro": 0.7711442786069652,
+        "f1_per_label": {
+          "arama_kurtarma": 0.7747747747747747,
+          "saglik": 0.25,
+          "barinma": 0.7741935483870968,
+          "gida_su": 0.35294117647058826,
+          "altyapi": 0.0,
+          "guvenlik": 0.8333333333333334,
+          "lojistik": 0.7407407407407407,
+          "psikolojik": 0.0,
+          "bilgi_paylasimi": 0.8484848484848485
+        }
+      },
+      "thresholds_per_label": {
+        "arama_kurtarma": 0.5599998831748962,
+        "saglik": 0.8399998545646667,
+        "barinma": 0.7099998593330383,
+        "gida_su": 0.7599998712539673,
+        "altyapi": 0.5799999237060547,
+        "guvenlik": 0.5799999237060547,
+        "lojistik": 0.5799999237060547,
+        "psikolojik": 0.5499998927116394,
+        "bilgi_paylasimi": 0.7999998331069946
+      },
+      "threshold_source": "models/exp2_gold_v2_posw/thresholds_cv.json",
+      "threshold_meta_file": "models/exp2_gold_v2_posw/threshold_tuning_cv_meta.json",
+      "threshold_type": "cv",
+      "threshold_strategy": "oof_global",
+      "threshold_k_folds": 5,
+      "threshold_smoothing_alpha": 1.0,
+      "pool_label_positives": {
+        "arama_kurtarma": 990,
+        "saglik": 43,
+        "barinma": 161,
+        "gida_su": 100,
+        "altyapi": 20,
+        "guvenlik": 35,
+        "lojistik": 265,
+        "psikolojik": 10,
+        "bilgi_paylasimi": 235
+      },
+      "rare_label_f1_test": {
+        "altyapi": 0.0,
+        "guvenlik": 0.6666666666666666,
+        "psikolojik": 0.0
+      },
+      "rare_label_f1_val": {
+        "altyapi": 0.0,
+        "guvenlik": 0.8333333333333334,
+        "psikolojik": 0.0
+      },
+      "notes": "Pos-weight recovers saglik, guvenlik, gida_su vs exp1. No silver pretraining, so the silver-leakage issue does not apply. altyapi and psikolojik still F1=0 — positive support in pool (20 / 10 rows) is too thin for pure-gold to recover."
+    },
+    {
+      "experiment": "exp3_silver_then_gold_v3_exgold",
+      "model_dir": "models/exp3_silver_then_gold_v3_exgold/final",
+      "config_yaml": "data/modeling/experiments/exp3_silver_then_gold_v3_exgold.yaml",
+      "base_model": "models/need_classification_silver_63k_exgold/final",
+      "training": "LEAK-FREE silver-pretrain (61,246 distant-label rows, gold ids EXCLUDED, BERTurk + pos_weight, LR=2e-5, 3 epochs) then gold fine-tune with pos_weight, LR=1e-5, 3 epochs, BS=16",
+      "pos_weight_used": true,
+      "silver_provenance": "data/modeling/need_classification_silver_63k_exgold/*.csv — built from emergency_geolocated_96k with gold id exclusion (0 overlap with any gold_combined split)",
+      "leak_free": true,
+      "test_csv": "data/modeling/need_classification_gold_combined/test.csv",
+      "val_csv": "data/modeling/need_classification_gold_combined/val.csv",
+      "rows_test": 194,
+      "rows_val": 193,
+      "labels": [
+        "arama_kurtarma",
+        "saglik",
+        "barinma",
+        "gida_su",
+        "altyapi",
+        "guvenlik",
+        "lojistik",
+        "psikolojik",
+        "bilgi_paylasimi"
+      ],
+      "test": {
+        "f1_micro": 0.8997555012224939,
+        "f1_macro": 0.8753215924052317,
+        "precision_micro": 0.9154228855721394,
+        "recall_micro": 0.8846153846153846,
+        "f1_per_label": {
+          "arama_kurtarma": 0.968609865470852,
+          "saglik": 1.0,
+          "barinma": 0.9565217391304348,
+          "gida_su": 0.8888888888888888,
+          "altyapi": 1.0,
+          "guvenlik": 0.5714285714285714,
+          "lojistik": 0.8115942028985508,
+          "psikolojik": 1.0,
+          "bilgi_paylasimi": 0.6808510638297872
+        }
+      },
+      "val": {
+        "f1_micro": 0.9040404040404041,
+        "f1_macro": 0.8312642987802117,
+        "precision_micro": 0.9179487179487179,
+        "recall_micro": 0.8905472636815921,
+        "f1_per_label": {
+          "arama_kurtarma": 0.944954128440367,
+          "saglik": 0.8,
+          "barinma": 0.96,
+          "gida_su": 0.8571428571428571,
+          "altyapi": 1.0,
+          "guvenlik": 0.9230769230769231,
+          "lojistik": 0.9302325581395349,
+          "psikolojik": 0.2222222222222222,
+          "bilgi_paylasimi": 0.84375
+        }
+      },
+      "thresholds_per_label": {
+        "arama_kurtarma": 0.5999999046325684,
+        "saglik": 0.8999998569488525,
+        "barinma": 0.929999828338623,
+        "gida_su": 0.13999998569488525,
+        "altyapi": 0.729999840259552,
+        "guvenlik": 0.7399998903274536,
+        "lojistik": 0.9099998474121094,
+        "psikolojik": 0.8599998354911804,
+        "bilgi_paylasimi": 0.8699998259544373
+      },
+      "threshold_source": "models/exp3_silver_then_gold_v3_exgold/thresholds_cv.json",
+      "threshold_meta_file": "models/exp3_silver_then_gold_v3_exgold/threshold_tuning_cv_meta.json",
+      "threshold_type": "cv",
+      "threshold_strategy": "oof_global",
+      "threshold_k_folds": 5,
+      "threshold_smoothing_alpha": 1.0,
+      "pool_label_positives": {
+        "arama_kurtarma": 990,
+        "saglik": 43,
+        "barinma": 161,
+        "gida_su": 100,
+        "altyapi": 20,
+        "guvenlik": 35,
+        "lojistik": 265,
+        "psikolojik": 10,
+        "bilgi_paylasimi": 235
+      },
+      "rare_label_f1_test": {
+        "altyapi": 1.0,
+        "guvenlik": 0.5714285714285714,
+        "psikolojik": 1.0
+      },
+      "rare_label_f1_val": {
+        "altyapi": 1.0,
+        "guvenlik": 0.9230769230769231,
+        "psikolojik": 0.2222222222222222
+      },
+      "notes": "Replaces the contaminated exp3_silver_then_gold_v2 (whose silver pool contained ALL 1934 gold_combined ids including the 194 test ids). Here the silver pool has been re-built from the geolocated 96k dataset with every gold id excluded; silver→gold transfer is therefore fair. The silver prior still carries rare-label semantics; altyapi and psikolojik saturate at F1=1.0 on test but the positive support is tiny (3 and 1 rows), so read as qualitative signal."
+    }
+  ],
+  "winners": {
+    "f1_micro_test": "exp3_silver_then_gold_v3_exgold",
+    "f1_macro_test": "exp3_silver_then_gold_v3_exgold",
+    "precision_micro_test": "exp3_silver_then_gold_v3_exgold",
+    "recall_micro_test": "exp3_silver_then_gold_v3_exgold",
+    "per_label_test": {
+      "arama_kurtarma": "exp3_silver_then_gold_v3_exgold",
+      "saglik": "exp3_silver_then_gold_v3_exgold",
+      "barinma": "exp3_silver_then_gold_v3_exgold",
+      "gida_su": "exp3_silver_then_gold_v3_exgold",
+      "altyapi": "exp3_silver_then_gold_v3_exgold",
+      "guvenlik": "exp2_gold_v2_posw",
+      "lojistik": "exp3_silver_then_gold_v3_exgold",
+      "psikolojik": "exp3_silver_then_gold_v3_exgold",
+      "bilgi_paylasimi": "exp1_gold_v2_bce"
+    }
+  },
+  "leak_summary": {
+    "old_silver_overlap_with_gold_union": 1934,
+    "new_silver_overlap_with_gold_union": 0
+  }
+}

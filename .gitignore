@@ -1,0 +1,52 @@
+.claude/
+logs/
+gold_set/
+
+# Python cache / local runtime
+__pycache__/
+scripts/__pycache__/
+*.pyc
+*.pyo
+*.pid
+*.log
+*.lock
+
+# Virtual env / editor noise
+.venv/
+venv/
+.idea/
+.vscode/
+
+# Large notebooks are optional for GitHub publish
+colab/*.ipynb
+
+# Heavy data artifacts: keep only lightweight analysis docs and prediction metadata
+data/*
+!data/analysis/
+!data/predictions/
+data/analysis/*
+!data/analysis/*.md
+!data/analysis/*.json
+data/predictions/*
+!data/predictions/*.meta.json
+
+# Heavy model artifacts: keep only selection pointer + threshold metadata for canonical final
+models/*
+!models/final/
+!models/exp3_silver_then_gold_v3_exgold/
+models/final/*
+!models/final/*.json
+models/exp3_silver_then_gold_v3_exgold/*
+!models/exp3_silver_then_gold_v3_exgold/label_columns.json
+!models/exp3_silver_then_gold_v3_exgold/thresholds_cv.json
+!models/exp3_silver_then_gold_v3_exgold/threshold_tuning_cv_meta.json
+
+# Exclude training checkpoints / weights everywhere
+*.pt
+*.pth
+*.bin
+*.safetensors
+optimizer.pt
+
+# Office exports
+*.xlsx

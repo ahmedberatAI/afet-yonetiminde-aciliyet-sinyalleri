@@ -1,0 +1,13 @@
+# Minimal dependencies for the modeling scripts (training/evaluation).
+#
+# NOTE: torch installation on Windows can require a matching CUDA build or CPU-only build.
+# Follow PyTorch's official install instructions for your environment if pip fails.
+
+pandas
+numpy
+scikit-learn
+pyyaml
+torch
+transformers
+accelerate
+

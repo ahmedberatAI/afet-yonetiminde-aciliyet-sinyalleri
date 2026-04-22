@@ -1,0 +1,102 @@
+{
+  "selected_experiment_key": "exp3_silver_then_gold_v3_exgold",
+  "selected_tag": "v2_final_leakfree_exp3",
+  "selection_version": 2,
+  "model_dir": "models/exp3_silver_then_gold_v3_exgold/final",
+  "label_columns_json": "models/exp3_silver_then_gold_v3_exgold/label_columns.json",
+  "thresholds_json": "models/exp3_silver_then_gold_v3_exgold/thresholds_cv.json",
+  "threshold_source": "cv",
+  "threshold_type": "oof_global",
+  "threshold_meta_json": "models/exp3_silver_then_gold_v3_exgold/threshold_tuning_cv_meta.json",
+  "comparison_source": {
+    "md": "data/analysis/experiment_comparison_v3_leakfree.md",
+    "json": "data/analysis/experiment_comparison_v3_leakfree.json",
+    "csv": "data/analysis/experiment_comparison_v3_leakfree.csv"
+  },
+  "error_analysis_source": {
+    "md": "data/analysis/error_analysis_v2_leakfree.md",
+    "json": "data/analysis/error_analysis_v2_leakfree.json",
+    "fp_csv": "data/analysis/error_analysis_v2_leakfree.fp.csv",
+    "fn_csv": "data/analysis/error_analysis_v2_leakfree.fn.csv",
+    "slices_csv": "data/analysis/error_analysis_v2_leakfree.slices.csv"
+  },
+  "content_overlap_audit": {
+    "md": "data/analysis/content_overlap_audit_v2_leakfree.md",
+    "json": "data/analysis/content_overlap_audit_v2_leakfree.json",
+    "totals": {
+      "gold_rows": 1934,
+      "exact_overlap": 407,
+      "near_dup_j085": 621,
+      "test_exact_overlap": 35,
+      "test_near_dup_j085": 59,
+      "test_rows": 194
+    },
+    "note": "id-level leak closed (0/1934), but normalized-text overlap remains: ~18% of test rows exact-match silver, ~30% near-dup at J>=0.85. Residual risk, documented."
+  },
+  "canonical_test_csv": "data/modeling/need_classification_gold_combined/test.csv",
+  "metrics_on_canonical_test": {
+    "rows": 194,
+    "f1_micro": 0.8997555012224939,
+    "f1_macro": 0.8753215924052317,
+    "precision_micro": 0.9154228855721394,
+    "recall_micro": 0.8846153846153846,
+    "f1_per_label": {
+      "arama_kurtarma": 0.968609865470852,
+      "saglik": 1.0,
+      "barinma": 0.9565217391304348,
+      "gida_su": 0.8888888888888888,
+      "altyapi": 1.0,
+      "guvenlik": 0.5714285714285714,
+      "lojistik": 0.8115942028985508,
+      "psikolojik": 1.0,
+      "bilgi_paylasimi": 0.6808510638297872
+    }
+  },
+  "selection_rationale": [
+    "Canonical leak-free karsilastirma (experiment_comparison_v3_leakfree.*) su anki winner olarak exp3_silver_then_gold_v3_exgold'u gosteriyor: f1_micro=0.8998, f1_macro=0.8753, her ikisi de exp1 (0.7325/0.4137) ve exp2 (0.7298/0.5560) uzerinde.",
+    "Silver pretrain'in rare-label transferi meveri duzeyde: altyapi (F1=0/0 -> F1=1.0), saglik (0->1.0), psikolojik (0->1.0) kazanimlari gold-only modellerde ulasilamadi; ancak bu F1=1.0 degerleri test setinde cok ince destekle (altyapi=3 poz, psikolojik=1 poz) olculdu ve kalibre basari degil, nitel sinyal seviyesindedir (step 8'de acikca belirtildi).",
+    "Guvenlik (test pozitif=4, F1=0.571) ve bilgi_paylasimi (test pozitif=25, F1=0.681) canonical winner'in acik zayif noktalaridir. bilgi_paylasimi exp1'in (F1=0.76) altina dustu - CV'nin 0.87 esigi cok tutucu ve model 'haber alamiyoruz' tarzi cumleleri sistematik olarak arama_kurtarma'ya yuvarliyor. Bu zayifliklar winner statusunu degistirmez ama production tuketiciler icin bilinmelidir.",
+    "v2 (contaminated) -> v3 (leak-free) gecisinde f1_micro yalnizca +0.0120 oynadi; content-level overlap'in (test ~%18 exact, ~%30 near-dup) metrikleri DRAMATIK sisirdigine dair kanit yok. Bununla birlikte residual risk olarak finalmetrikler biraz overstated olabilir; ikinci bir silver build pass ile content-level dedup step 10+ icin onerilir."
+  ],
+  "known_limitations": [
+    "Rare label (altyapi, psikolojik, saglik, guvenlik) F1 degerleri kucuk test destegi (1-7 pozitif) sebebiyle yuksek varyansa sahiptir; tek tahmin saturasyonu bekleniyor.",
+    "guvenlik ve bilgi_paylasimi icin CV esikleri production'da recall feda ediyor; ihtiyac halinde ayri bir `threshold_production.json` tasarlanabilir (bu step 9 kapsami disinda).",
+    "Silver havuzu id-seviyesinde leak-free, icerik-seviyesinde degil: test rows'un ~%18'inde silver'daki baska id'de ayni normalize metin bulundu (muhtemelen retweet/alinti). Bu riski content_overlap_audit_v2_leakfree ile olctuk ama duzeltme step 10'da ele alinacak."
+  ],
+  "deprecated_artifacts": {
+    "historical_comparison": "data/analysis/experiment_comparison_v2.*  (CONTAMINATED - silver pool gold'un 1934 id'sinin tamamini iceriyordu; kullanmayin)",
+    "historical_selection": "models/final/selection_historical_v1_gold_combined_weighted.json  (preview v1; F1-macro=0.309, rare labels F1=0)",
+    "historical_predictions": [
+      "data/predictions/need_predictions_geolocated_63k.csv",
+      "data/predictions/need_predictions_geolocated_gold_combined_weighted.csv",
+      "data/predictions/need_predictions_geolocated_v1_gold_combined_weighted.csv"
+    ]
+  },
+  "canonical_prediction_output": {
+    "csv": "data/predictions/need_predictions_geolocated_v2_final.csv",
+    "meta": "data/predictions/need_predictions_geolocated_v2_final.meta.json"
+  },
+  "selection_ranking": [
+    {
+      "rank": 1,
+      "experiment_key": "exp3_silver_then_gold_v3_exgold",
+      "f1_micro": 0.8997555012224939,
+      "f1_macro": 0.8753215924052317,
+      "leak_free": true
+    },
+    {
+      "rank": 2,
+      "experiment_key": "exp2_gold_v2_posw",
+      "f1_micro": 0.7298245614035088,
+      "f1_macro": 0.5560306100322195,
+      "leak_free": true
+    },
+    {
+      "rank": 3,
+      "experiment_key": "exp1_gold_v2_bce",
+      "f1_micro": 0.7325102880658436,
+      "f1_macro": 0.41374099923053884,
+      "leak_free": true
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "step": 6,
+  "canonical_threshold_strategy": "5-fold iterative multilabel CV on train+val pool only, OOF-global threshold search, smoothed_f1(alpha=1.0)",
+  "current_split": {
+    "train_csv": "data/modeling/need_classification_gold_combined/train.csv",
+    "val_csv": "data/modeling/need_classification_gold_combined/val.csv",
+    "test_csv": "data/modeling/need_classification_gold_combined/test.csv",
+    "val_label_positives": {
+      "arama_kurtarma": 111,
+      "saglik": 7,
+      "barinma": 13,
+      "gida_su": 3,
+      "altyapi": 1,
+      "guvenlik": 7,
+      "lojistik": 23,
+      "psikolojik": 1,
+      "bilgi_paylasimi": 35
+    }
+  },
+  "stale_artifact_audit": {
+    "old_report": "models/need_classification_gold_combined_weighted/threshold_tuning_report.txt",
+    "old_report_label_positives": {
+      "arama_kurtarma": 98,
+      "saglik": 6,
+      "barinma": 15,
+      "gida_su": 11,
+      "altyapi": 0,
+      "guvenlik": 0,
+      "lojistik": 29,
+      "psikolojik": 0,
+      "bilgi_paylasimi": 1
+    },
+    "mismatch_labels": [
+      {
+        "label": "arama_kurtarma",
+        "old_report_pos": 98,
+        "current_val_pos": 111,
+        "delta": 13
+      },
+      {
+        "label": "saglik",
+        "old_report_pos": 6,
+        "current_val_pos": 7,
+        "delta": 1
+      },
+      {
+        "label": "barinma",
+        "old_report_pos": 15,
+        "current_val_pos": 13,
+        "delta": -2
+      },
+      {
+        "label": "gida_su",
+        "old_report_pos": 11,
+        "current_val_pos": 3,
+        "delta": -8
+      },
+      {
+        "label": "altyapi",
+        "old_report_pos": 0,
+        "current_val_pos": 1,
+        "delta": 1
+      },
+      {
+        "label": "guvenlik",
+        "old_report_pos": 0,
+        "current_val_pos": 7,
+        "delta": 7
+      },
+      {
+        "label": "lojistik",
+        "old_report_pos": 29,
+        "current_val_pos": 23,
+        "delta": -6
+      },
+      {
+        "label": "psikolojik",
+        "old_report_pos": 0,
+        "current_val_pos": 1,
+        "delta": 1
+      },
+      {
+        "label": "bilgi_paylasimi",
+        "old_report_pos": 1,
+        "current_val_pos": 35,
+        "delta": 34
+      }
+    ],
+    "canonical_decision": "Do not use the old val-based report for step 6 or later selection."
+  },
+  "experiments": {
+    "exp1_gold_v2_bce": {
+      "thresholds_json": "models/exp1_gold_v2_bce/thresholds_cv.json",
+      "report_txt": "models/exp1_gold_v2_bce/threshold_tuning_cv_report.txt",
+      "meta_json": "models/exp1_gold_v2_bce/threshold_tuning_cv_meta.json",
+      "oof_csv": "models/exp1_gold_v2_bce/threshold_tuning_cv_oof.csv",
+      "status": "ready"
+    },
+    "exp2_gold_v2_posw": {
+      "thresholds_json": "models/exp2_gold_v2_posw/thresholds_cv.json",
+      "report_txt": "models/exp2_gold_v2_posw/threshold_tuning_cv_report.txt",
+      "meta_json": "models/exp2_gold_v2_posw/threshold_tuning_cv_meta.json",
+      "oof_csv": "models/exp2_gold_v2_posw/threshold_tuning_cv_oof.csv",
+      "status": "ready"
+    },
+    "exp3_silver_then_gold_v2": {
+      "status": "blocked",
+      "reason": "Silver pretrain directory has no exported model.safetensors/pytorch_model.bin, so warm-start CV tuning would be non-reproducible and was not run in step 6.",
+      "silver_weight_hits": [],
+      "status_txt": "models/exp3_silver_then_gold_v2/threshold_tuning_cv_blocked.txt",
+      "status_json": "models/exp3_silver_then_gold_v2/threshold_tuning_cv_blocked.json"
+    }
+  }
+}

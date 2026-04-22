@@ -1,0 +1,90 @@
+{
+  "exp1_gold_v2_bce": {
+    "rows": 1740,
+    "threshold_source": "models/exp1_gold_v2_bce/thresholds_cv.json",
+    "baseline_global_0_5": {
+      "f1_micro": 0.7751078250154035,
+      "f1_macro": 0.34246805956461795,
+      "precision_micro": 0.9069935111751982,
+      "recall_micro": 0.6767079074771383,
+      "per_label_f1": {
+        "arama_kurtarma": 0.9263585576434739,
+        "saglik": 0.0,
+        "barinma": 0.803921568627451,
+        "gida_su": 0.375,
+        "altyapi": 0.0,
+        "guvenlik": 0.0,
+        "lojistik": 0.2080536912751678,
+        "psikolojik": 0.0,
+        "bilgi_paylasimi": 0.7688787185354691
+      }
+    },
+    "cv_tuned": {
+      "f1_micro": 0.7395418326693227,
+      "f1_macro": 0.44844927744877605,
+      "precision_micro": 0.6884561891515995,
+      "recall_micro": 0.7988165680473372,
+      "per_label_f1": {
+        "arama_kurtarma": 0.9265770423991727,
+        "saglik": 0.12121212121212122,
+        "barinma": 0.8198757763975155,
+        "gida_su": 0.6007905138339921,
+        "altyapi": 0.08196721311475409,
+        "guvenlik": 0.056140350877192984,
+        "lojistik": 0.6519337016574586,
+        "psikolojik": 0.0,
+        "bilgi_paylasimi": 0.7775467775467776
+      }
+    },
+    "delta": {
+      "f1_micro": -0.03556599234608082,
+      "f1_macro": 0.1059812178841581,
+      "precision_micro": -0.21853732202359877,
+      "recall_micro": 0.12210866057019898
+    }
+  },
+  "exp2_gold_v2_posw": {
+    "rows": 1740,
+    "threshold_source": "models/exp2_gold_v2_posw/thresholds_cv.json",
+    "baseline_global_0_5": {
+      "f1_micro": 0.6666666666666666,
+      "f1_macro": 0.4640092788510644,
+      "precision_micro": 0.5436036647438073,
+      "recall_micro": 0.8617536309844002,
+      "per_label_f1": {
+        "arama_kurtarma": 0.7838418564675548,
+        "saglik": 0.3373493975903614,
+        "barinma": 0.6952595936794582,
+        "gida_su": 0.49586776859504134,
+        "altyapi": 0.1111111111111111,
+        "guvenlik": 0.6075949367088608,
+        "lojistik": 0.4752475247524752,
+        "psikolojik": 0.0,
+        "bilgi_paylasimi": 0.6698113207547169
+      }
+    },
+    "cv_tuned": {
+      "f1_micro": 0.7255861891265137,
+      "f1_macro": 0.5233466750898264,
+      "precision_micro": 0.6963402571711177,
+      "recall_micro": 0.757396449704142,
+      "per_label_f1": {
+        "arama_kurtarma": 0.7984862819299905,
+        "saglik": 0.43636363636363634,
+        "barinma": 0.7887323943661971,
+        "gida_su": 0.6299212598425197,
+        "altyapi": 0.14814814814814814,
+        "guvenlik": 0.6440677966101694,
+        "lojistik": 0.4955116696588869,
+        "psikolojik": 0.0,
+        "bilgi_paylasimi": 0.7688888888888888
+      }
+    },
+    "delta": {
+      "f1_micro": 0.05891952245984711,
+      "f1_macro": 0.05933739623876194,
+      "precision_micro": 0.1527365924273104,
+      "recall_micro": -0.10435718128025817
+    }
+  }
+}

@@ -1,0 +1,244 @@
+{
+  "train_csv": "data/modeling/need_classification_gold_combined/train.csv",
+  "val_csv": "data/modeling/need_classification_gold_combined/val.csv",
+  "base_model": "models/need_classification_silver_63k_exgold/final",
+  "labels": [
+    "arama_kurtarma",
+    "saglik",
+    "barinma",
+    "gida_su",
+    "altyapi",
+    "guvenlik",
+    "lojistik",
+    "psikolojik",
+    "bilgi_paylasimi"
+  ],
+  "k": 5,
+  "seed": 42,
+  "strategy": "oof_global",
+  "smoothing_alpha": 1.0,
+  "grid": {
+    "min_thr": 0.05,
+    "max_thr": 0.95,
+    "step": 0.01,
+    "count": 91
+  },
+  "use_pos_weight": true,
+  "pos_weight_min": 1.0,
+  "pos_weight_max": 50.0,
+  "require_cuda": true,
+  "runtime_device": {
+    "torch_version": "2.10.0+cu128",
+    "cuda_available": true,
+    "device": "cuda",
+    "cuda_device_count": 1,
+    "cuda_device_name": "NVIDIA GeForce RTX 5090 Laptop GPU",
+    "cuda_capability": "12.0"
+  },
+  "pool_rows": 1740,
+  "pool_label_positives": {
+    "arama_kurtarma": 990,
+    "saglik": 43,
+    "barinma": 161,
+    "gida_su": 100,
+    "altyapi": 20,
+    "guvenlik": 35,
+    "lojistik": 265,
+    "psikolojik": 10,
+    "bilgi_paylasimi": 235
+  },
+  "fold_sizes": [
+    348,
+    348,
+    348,
+    348,
+    348
+  ],
+  "fold_label_positives": [
+    {
+      "arama_kurtarma": 193,
+      "saglik": 9,
+      "barinma": 34,
+      "gida_su": 18,
+      "altyapi": 4,
+      "guvenlik": 7,
+      "lojistik": 50,
+      "psikolojik": 2,
+      "bilgi_paylasimi": 49
+    },
+    {
+      "arama_kurtarma": 198,
+      "saglik": 9,
+      "barinma": 30,
+      "gida_su": 20,
+      "altyapi": 4,
+      "guvenlik": 7,
+      "lojistik": 54,
+      "psikolojik": 2,
+      "bilgi_paylasimi": 47
+    },
+    {
+      "arama_kurtarma": 192,
+      "saglik": 8,
+      "barinma": 36,
+      "gida_su": 22,
+      "altyapi": 4,
+      "guvenlik": 7,
+      "lojistik": 52,
+      "psikolojik": 2,
+      "bilgi_paylasimi": 45
+    },
+    {
+      "arama_kurtarma": 204,
+      "saglik": 8,
+      "barinma": 33,
+      "gida_su": 21,
+      "altyapi": 4,
+      "guvenlik": 7,
+      "lojistik": 57,
+      "psikolojik": 2,
+      "bilgi_paylasimi": 47
+    },
+    {
+      "arama_kurtarma": 203,
+      "saglik": 9,
+      "barinma": 28,
+      "gida_su": 19,
+      "altyapi": 4,
+      "guvenlik": 7,
+      "lojistik": 52,
+      "psikolojik": 2,
+      "bilgi_paylasimi": 47
+    }
+  ],
+  "thresholds_selected": {
+    "arama_kurtarma": 0.5999999046325684,
+    "saglik": 0.8999998569488525,
+    "barinma": 0.929999828338623,
+    "gida_su": 0.13999998569488525,
+    "altyapi": 0.729999840259552,
+    "guvenlik": 0.7399998903274536,
+    "lojistik": 0.9099998474121094,
+    "psikolojik": 0.8599998354911804,
+    "bilgi_paylasimi": 0.8699998259544373
+  },
+  "per_label_results": {
+    "arama_kurtarma": {
+      "oof_pos": 990,
+      "oof_best_thr": 0.5999999046325684,
+      "oof_smoothed_f1": 0.9470198675496688,
+      "fold_best_thr": [
+        0.2999999523162842,
+        0.5899999141693115,
+        0.619999885559082,
+        0.4299999475479126,
+        0.3699999451637268
+      ],
+      "fold_median_thr": 0.4299999475479126
+    },
+    "saglik": {
+      "oof_pos": 43,
+      "oof_best_thr": 0.8999998569488525,
+      "oof_smoothed_f1": 0.872093023255814,
+      "fold_best_thr": [
+        0.16999997198581696,
+        0.2999999523162842,
+        0.8999998569488525,
+        0.8299998641014099,
+        0.2099999636411667
+      ],
+      "fold_median_thr": 0.2999999523162842
+    },
+    "barinma": {
+      "oof_pos": 161,
+      "oof_best_thr": 0.929999828338623,
+      "oof_smoothed_f1": 0.921875,
+      "fold_best_thr": [
+        0.21999995410442352,
+        0.929999828338623,
+        0.9199998378753662,
+        0.5499998927116394,
+        0.5799999237060547
+      ],
+      "fold_median_thr": 0.5799999237060547
+    },
+    "gida_su": {
+      "oof_pos": 100,
+      "oof_best_thr": 0.13999998569488525,
+      "oof_smoothed_f1": 0.9368932038834952,
+      "fold_best_thr": [
+        0.12999998033046722,
+        0.07999999821186066,
+        0.06999999284744263,
+        0.13999998569488525,
+        0.09999999403953552
+      ],
+      "fold_median_thr": 0.09999999403953552
+    },
+    "altyapi": {
+      "oof_pos": 20,
+      "oof_best_thr": 0.729999840259552,
+      "oof_smoothed_f1": 0.8048780487804879,
+      "fold_best_thr": [
+        0.729999840259552,
+        0.11999998986721039,
+        0.3999999463558197,
+        0.6499999165534973,
+        0.5999999046325684
+      ],
+      "fold_median_thr": 0.5999999046325684
+    },
+    "guvenlik": {
+      "oof_pos": 35,
+      "oof_best_thr": 0.7399998903274536,
+      "oof_smoothed_f1": 0.75,
+      "fold_best_thr": [
+        0.929999828338623,
+        0.4199999272823334,
+        0.7399998903274536,
+        0.7399998903274536,
+        0.729999840259552
+      ],
+      "fold_median_thr": 0.7399998903274536
+    },
+    "lojistik": {
+      "oof_pos": 265,
+      "oof_best_thr": 0.9099998474121094,
+      "oof_smoothed_f1": 0.9106463878326996,
+      "fold_best_thr": [
+        0.7999998331069946,
+        0.7399998903274536,
+        0.8399998545646667,
+        0.8599998354911804,
+        0.8699998259544373
+      ],
+      "fold_median_thr": 0.8399998545646667
+    },
+    "psikolojik": {
+      "oof_pos": 10,
+      "oof_best_thr": 0.8599998354911804,
+      "oof_smoothed_f1": 0.40476190476190477,
+      "fold_best_thr": [
+        0.43999993801116943,
+        0.5099999308586121,
+        0.9199998378753662,
+        0.8399998545646667,
+        0.8599998354911804
+      ],
+      "fold_median_thr": 0.8399998545646667
+    },
+    "bilgi_paylasimi": {
+      "oof_pos": 235,
+      "oof_best_thr": 0.8699998259544373,
+      "oof_smoothed_f1": 0.8066666666666666,
+      "fold_best_thr": [
+        0.6799998879432678,
+        0.8299998641014099,
+        0.8699998259544373,
+        0.7199998497962952,
+        0.8899998068809509
+      ],
+      "fold_median_thr": 0.8299998641014099
+    }
+  }
+}

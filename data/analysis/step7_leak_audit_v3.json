@@ -1,0 +1,94 @@
+{
+  "task": "step7_leak_audit_v3",
+  "gold_sources": {
+    "canonical_csv": "data/need_classification_gold_combined.csv",
+    "splits": {
+      "train": "data/modeling/need_classification_gold_combined/train.csv",
+      "val": "data/modeling/need_classification_gold_combined/val.csv",
+      "test": "data/modeling/need_classification_gold_combined/test.csv"
+    },
+    "canonical_rows": 1934,
+    "split_train_rows": 1547,
+    "split_val_rows": 193,
+    "split_test_rows": 194,
+    "canonical_equals_split_union": true
+  },
+  "silvers": {
+    "old_silver_contaminated": {
+      "path": "data/labeling/need_classification_silver_63k_profileA.csv",
+      "exists": true,
+      "rows": 63180,
+      "unique_ids": 63180,
+      "overlap_with_gold_canonical": 1934,
+      "overlap_with_gold_train": 1547,
+      "overlap_with_gold_val": 193,
+      "overlap_with_gold_test": 194,
+      "overlap_with_gold_split_union": 1934
+    },
+    "new_silver_leak_free": {
+      "path": "data/labeling/need_classification_silver_63k_profileA_exgold.csv",
+      "exists": true,
+      "rows": 61246,
+      "unique_ids": 61246,
+      "overlap_with_gold_canonical": 0,
+      "overlap_with_gold_train": 0,
+      "overlap_with_gold_val": 0,
+      "overlap_with_gold_test": 0,
+      "overlap_with_gold_split_union": 0
+    }
+  },
+  "historical_v2_exp3": {
+    "model_dir": "models/exp3_silver_then_gold_v2/final",
+    "threshold_source": "models/exp3_silver_then_gold_v2/thresholds_cv.json",
+    "eval_test_path": "models/exp3_silver_then_gold_v2/eval_test_tuned.json",
+    "status": "HISTORICAL_CONTAMINATED",
+    "issue": "Silver pretraining pool (data/labeling/need_classification_silver_63k_profileA.csv) contained every gold_combined id (train=1547, val=193, test=194). This means the silver model saw the gold test inputs during distant-label pretraining, which invalidates the silver→gold transfer comparison.",
+    "test_metrics_at_tuned_threshold": {
+      "f1_micro": 0.8878048780487805,
+      "f1_macro": 0.8734381105346883,
+      "precision_micro": 0.900990099009901,
+      "recall_micro": 0.875,
+      "f1_per_label": {
+        "arama_kurtarma": 0.9502262443438914,
+        "saglik": 1.0,
+        "barinma": 0.9565217391304348,
+        "gida_su": 0.8888888888888888,
+        "altyapi": 1.0,
+        "guvenlik": 0.5714285714285714,
+        "lojistik": 0.8,
+        "psikolojik": 1.0,
+        "bilgi_paylasimi": 0.6938775510204082
+      }
+    }
+  },
+  "new_v3_exp3": {
+    "model_dir": "models/exp3_silver_then_gold_v3_exgold/final",
+    "base_model": "models/need_classification_silver_63k_exgold/final",
+    "threshold_source": "models/exp3_silver_then_gold_v3_exgold/thresholds_cv.json",
+    "test_metrics_at_tuned_threshold": {
+      "f1_micro": 0.8997555012224939,
+      "f1_macro": 0.8753215924052317,
+      "precision_micro": 0.9154228855721394,
+      "recall_micro": 0.8846153846153846,
+      "f1_per_label": {
+        "arama_kurtarma": 0.968609865470852,
+        "saglik": 1.0,
+        "barinma": 0.9565217391304348,
+        "gida_su": 0.8888888888888888,
+        "altyapi": 1.0,
+        "guvenlik": 0.5714285714285714,
+        "lojistik": 0.8115942028985508,
+        "psikolojik": 1.0,
+        "bilgi_paylasimi": 0.6808510638297872
+      }
+    }
+  },
+  "remediation_commands": [
+    "python scripts/build_need_classification_silver_from_geolocated.py --input data/processed/emergency_geolocated_96k.csv --output data/labeling/need_classification_silver_63k_profileA_exgold.csv --profile A --dedup --exclude-gold-csv data/need_classification_gold_combined.csv --exclude-gold-csv data/modeling/need_classification_gold_combined/train.csv --exclude-gold-csv data/modeling/need_classification_gold_combined/val.csv --exclude-gold-csv data/modeling/need_classification_gold_combined/test.csv",
+    "python scripts/prepare_model_splits.py --input data/labeling/need_classification_silver_63k_profileA_exgold.csv --outdir data/modeling/need_classification_silver_63k_exgold --seed 42 --train-size 0.80 --val-size 0.10 --test-size 0.10 --stratify-col aciliyet_0_3 --ensure-test-coverage",
+    "python scripts/train_need_classifier.py --config data/modeling/need_classification_silver_63k_exgold/training_config.yaml --output-dir models/need_classification_silver_63k_exgold",
+    "python scripts/train_need_classifier.py --config data/modeling/experiments/exp3_silver_then_gold_v3_exgold.yaml --output-dir models/exp3_silver_then_gold_v3_exgold",
+    "python scripts/tune_thresholds_cv.py --train-csv data/modeling/need_classification_gold_combined/train.csv --val-csv data/modeling/need_classification_gold_combined/val.csv --k 5 --seed 42 --base-model models/need_classification_silver_63k_exgold/final --epochs 3 --lr 1e-5 --fp16 --use-pos-weight --strategy oof_global --out-thresholds models/exp3_silver_then_gold_v3_exgold/thresholds_cv.json --out-report models/exp3_silver_then_gold_v3_exgold/threshold_tuning_cv_report.txt --out-meta models/exp3_silver_then_gold_v3_exgold/threshold_tuning_cv_meta.json --out-oof models/exp3_silver_then_gold_v3_exgold/threshold_tuning_cv_oof.csv --scratch-dir models/_cv_tuning_scratch_exp3_v3_exgold --require-cuda",
+    "python scripts/evaluate_need_classifier.py --model-dir models/exp3_silver_then_gold_v3_exgold/final --csv data/modeling/need_classification_gold_combined/test.csv --thresholds-json models/exp3_silver_then_gold_v3_exgold/thresholds_cv.json --out models/exp3_silver_then_gold_v3_exgold/eval_test_tuned.json"
+  ]
+}

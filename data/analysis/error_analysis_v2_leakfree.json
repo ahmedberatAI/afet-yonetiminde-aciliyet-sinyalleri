@@ -1,0 +1,1207 @@
+{
+  "model_dir": "C:/Users/omen/Desktop/afetYonetimi_colab/models/exp3_silver_then_gold_v3_exgold/final",
+  "test_csv": "C:/Users/omen/Desktop/afetYonetimi_colab/data/modeling/need_classification_gold_combined/test.csv",
+  "thresholds_json": "C:/Users/omen/Desktop/afetYonetimi_colab/models/exp3_silver_then_gold_v3_exgold/thresholds_cv.json",
+  "comparison_src": "C:/Users/omen/Desktop/afetYonetimi_colab/data/analysis/experiment_comparison_v3_leakfree.json",
+  "gpu": "NVIDIA GeForce RTX 5090 Laptop GPU",
+  "seed": 42,
+  "rows": 194,
+  "labels": [
+    "arama_kurtarma",
+    "saglik",
+    "barinma",
+    "gida_su",
+    "altyapi",
+    "guvenlik",
+    "lojistik",
+    "psikolojik",
+    "bilgi_paylasimi"
+  ],
+  "thresholds": {
+    "arama_kurtarma": 0.5999999046325684,
+    "saglik": 0.8999998569488525,
+    "barinma": 0.929999828338623,
+    "gida_su": 0.13999998569488525,
+    "altyapi": 0.729999840259552,
+    "guvenlik": 0.7399998903274536,
+    "lojistik": 0.9099998474121094,
+    "psikolojik": 0.8599998354911804,
+    "bilgi_paylasimi": 0.8699998259544373
+  },
+  "overall_metrics": {
+    "precision_micro": 0.9154228855721394,
+    "recall_micro": 0.8846153846153846,
+    "f1_micro": 0.8997555012224939,
+    "f1_macro": 0.8753215924052317
+  },
+  "per_label_confusion": {
+    "arama_kurtarma": {
+      "tp": 108,
+      "fp": 4,
+      "fn": 3,
+      "tn": 79,
+      "precision": 0.9642857142857143,
+      "recall": 0.972972972972973,
+      "f1": 0.968609865470852
+    },
+    "saglik": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0,
+      "tn": 187,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "barinma": {
+      "tp": 11,
+      "fp": 0,
+      "fn": 1,
+      "tn": 182,
+      "precision": 1.0,
+      "recall": 0.9166666666666666,
+      "f1": 0.9565217391304348
+    },
+    "gida_su": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 2,
+      "tn": 184,
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1": 0.888888888888889
+    },
+    "altyapi": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0,
+      "tn": 191,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "guvenlik": {
+      "tp": 2,
+      "fp": 1,
+      "fn": 2,
+      "tn": 189,
+      "precision": 0.6666666666666666,
+      "recall": 0.5,
+      "f1": 0.5714285714285715
+    },
+    "lojistik": {
+      "tp": 28,
+      "fp": 6,
+      "fn": 7,
+      "tn": 153,
+      "precision": 0.8235294117647058,
+      "recall": 0.8,
+      "f1": 0.8115942028985507
+    },
+    "psikolojik": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 193,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "bilgi_paylasimi": {
+      "tp": 16,
+      "fp": 6,
+      "fn": 9,
+      "tn": 163,
+      "precision": 0.7272727272727273,
+      "recall": 0.64,
+      "f1": 0.6808510638297872
+    }
+  },
+  "test_positives": {
+    "arama_kurtarma": 111,
+    "saglik": 7,
+    "barinma": 12,
+    "gida_su": 10,
+    "altyapi": 3,
+    "guvenlik": 4,
+    "lojistik": 35,
+    "psikolojik": 1,
+    "bilgi_paylasimi": 25
+  },
+  "gold_pool_positives": {
+    "arama_kurtarma": 1101,
+    "saglik": 50,
+    "barinma": 173,
+    "gida_su": 110,
+    "altyapi": 23,
+    "guvenlik": 39,
+    "lojistik": 300,
+    "psikolojik": 11,
+    "bilgi_paylasimi": 260
+  },
+  "fn_cofire": {
+    "arama_kurtarma": {},
+    "saglik": {},
+    "barinma": {},
+    "gida_su": {
+      "arama_kurtarma": 1,
+      "lojistik": 1
+    },
+    "altyapi": {},
+    "guvenlik": {
+      "arama_kurtarma": 1,
+      "barinma": 1,
+      "gida_su": 1
+    },
+    "lojistik": {
+      "arama_kurtarma": 5
+    },
+    "psikolojik": {},
+    "bilgi_paylasimi": {
+      "arama_kurtarma": 4,
+      "altyapi": 2,
+      "barinma": 1,
+      "guvenlik": 1
+    }
+  },
+  "fp_cofire": {
+    "arama_kurtarma": {
+      "lojistik": 2,
+      "altyapi": 1
+    },
+    "saglik": {},
+    "barinma": {},
+    "gida_su": {},
+    "altyapi": {},
+    "guvenlik": {
+      "arama_kurtarma": 1,
+      "bilgi_paylasimi": 1
+    },
+    "lojistik": {
+      "arama_kurtarma": 5,
+      "saglik": 1
+    },
+    "psikolojik": {},
+    "bilgi_paylasimi": {
+      "arama_kurtarma": 1
+    }
+  },
+  "gold_cooccurrence_top": [
+    {
+      "a": "arama_kurtarma",
+      "b": "lojistik",
+      "count": 25
+    },
+    {
+      "a": "arama_kurtarma",
+      "b": "bilgi_paylasimi",
+      "count": 9
+    },
+    {
+      "a": "arama_kurtarma",
+      "b": "saglik",
+      "count": 6
+    },
+    {
+      "a": "barinma",
+      "b": "gida_su",
+      "count": 4
+    },
+    {
+      "a": "arama_kurtarma",
+      "b": "gida_su",
+      "count": 3
+    },
+    {
+      "a": "gida_su",
+      "b": "lojistik",
+      "count": 3
+    },
+    {
+      "a": "altyapi",
+      "b": "bilgi_paylasimi",
+      "count": 2
+    },
+    {
+      "a": "arama_kurtarma",
+      "b": "barinma",
+      "count": 1
+    },
+    {
+      "a": "arama_kurtarma",
+      "b": "altyapi",
+      "count": 1
+    },
+    {
+      "a": "arama_kurtarma",
+      "b": "guvenlik",
+      "count": 1
+    },
+    {
+      "a": "arama_kurtarma",
+      "b": "psikolojik",
+      "count": 1
+    },
+    {
+      "a": "barinma",
+      "b": "guvenlik",
+      "count": 1
+    },
+    {
+      "a": "barinma",
+      "b": "bilgi_paylasimi",
+      "count": 1
+    },
+    {
+      "a": "gida_su",
+      "b": "guvenlik",
+      "count": 1
+    },
+    {
+      "a": "altyapi",
+      "b": "lojistik",
+      "count": 1
+    }
+  ],
+  "both_true_one_pred_top": [
+    {
+      "a": "arama_kurtarma",
+      "b": "lojistik",
+      "gold_both": 25,
+      "pred_both": 20,
+      "pred_only_a": 4,
+      "pred_only_b": 0,
+      "pred_neither": 1
+    },
+    {
+      "a": "arama_kurtarma",
+      "b": "bilgi_paylasimi",
+      "gold_both": 9,
+      "pred_both": 5,
+      "pred_only_a": 4,
+      "pred_only_b": 0,
+      "pred_neither": 0
+    },
+    {
+      "a": "altyapi",
+      "b": "bilgi_paylasimi",
+      "gold_both": 2,
+      "pred_both": 0,
+      "pred_only_a": 2,
+      "pred_only_b": 0,
+      "pred_neither": 0
+    },
+    {
+      "a": "arama_kurtarma",
+      "b": "gida_su",
+      "gold_both": 3,
+      "pred_both": 2,
+      "pred_only_a": 1,
+      "pred_only_b": 0,
+      "pred_neither": 0
+    },
+    {
+      "a": "arama_kurtarma",
+      "b": "guvenlik",
+      "gold_both": 1,
+      "pred_both": 0,
+      "pred_only_a": 1,
+      "pred_only_b": 0,
+      "pred_neither": 0
+    },
+    {
+      "a": "barinma",
+      "b": "guvenlik",
+      "gold_both": 1,
+      "pred_both": 0,
+      "pred_only_a": 1,
+      "pred_only_b": 0,
+      "pred_neither": 0
+    },
+    {
+      "a": "barinma",
+      "b": "bilgi_paylasimi",
+      "gold_both": 1,
+      "pred_both": 0,
+      "pred_only_a": 1,
+      "pred_only_b": 0,
+      "pred_neither": 0
+    },
+    {
+      "a": "gida_su",
+      "b": "guvenlik",
+      "gold_both": 1,
+      "pred_both": 0,
+      "pred_only_a": 1,
+      "pred_only_b": 0,
+      "pred_neither": 0
+    },
+    {
+      "a": "gida_su",
+      "b": "lojistik",
+      "gold_both": 3,
+      "pred_both": 2,
+      "pred_only_a": 0,
+      "pred_only_b": 1,
+      "pred_neither": 0
+    },
+    {
+      "a": "arama_kurtarma",
+      "b": "saglik",
+      "gold_both": 6,
+      "pred_both": 6,
+      "pred_only_a": 0,
+      "pred_only_b": 0,
+      "pred_neither": 0
+    },
+    {
+      "a": "arama_kurtarma",
+      "b": "barinma",
+      "gold_both": 1,
+      "pred_both": 1,
+      "pred_only_a": 0,
+      "pred_only_b": 0,
+      "pred_neither": 0
+    },
+    {
+      "a": "arama_kurtarma",
+      "b": "altyapi",
+      "gold_both": 1,
+      "pred_both": 1,
+      "pred_only_a": 0,
+      "pred_only_b": 0,
+      "pred_neither": 0
+    },
+    {
+      "a": "arama_kurtarma",
+      "b": "psikolojik",
+      "gold_both": 1,
+      "pred_both": 1,
+      "pred_only_a": 0,
+      "pred_only_b": 0,
+      "pred_neither": 0
+    },
+    {
+      "a": "barinma",
+      "b": "gida_su",
+      "gold_both": 4,
+      "pred_both": 4,
+      "pred_only_a": 0,
+      "pred_only_b": 0,
+      "pred_neither": 0
+    },
+    {
+      "a": "altyapi",
+      "b": "lojistik",
+      "gold_both": 1,
+      "pred_both": 1,
+      "pred_only_a": 0,
+      "pred_only_b": 0,
+      "pred_neither": 0
+    }
+  ],
+  "slices": {
+    "Aciliyet (0-3)": [
+      {
+        "slice_col": "aciliyet_0_3",
+        "group": "0",
+        "rows": 7,
+        "rows_with_any_error": 2,
+        "error_rate": 0.2857142857142857
+      },
+      {
+        "slice_col": "aciliyet_0_3",
+        "group": "2",
+        "rows": 19,
+        "rows_with_any_error": 5,
+        "error_rate": 0.2631578947368421
+      },
+      {
+        "slice_col": "aciliyet_0_3",
+        "group": "1",
+        "rows": 56,
+        "rows_with_any_error": 12,
+        "error_rate": 0.21428571428571427
+      },
+      {
+        "slice_col": "aciliyet_0_3",
+        "group": "3",
+        "rows": 112,
+        "rows_with_any_error": 19,
+        "error_rate": 0.16964285714285715
+      }
+    ],
+    "Metin uzunluğu": [
+      {
+        "slice_col": "_len_bucket",
+        "group": "medium(60-139)",
+        "rows": 15,
+        "rows_with_any_error": 3,
+        "error_rate": 0.2
+      },
+      {
+        "slice_col": "_len_bucket",
+        "group": "long(>=140)",
+        "rows": 179,
+        "rows_with_any_error": 35,
+        "error_rate": 0.19553072625698323
+      }
+    ],
+    "Gold etiket sayısı": [
+      {
+        "slice_col": "_k_gold",
+        "group": "3+",
+        "rows": 4,
+        "rows_with_any_error": 3,
+        "error_rate": 0.75
+      },
+      {
+        "slice_col": "_k_gold",
+        "group": "2",
+        "rows": 45,
+        "rows_with_any_error": 12,
+        "error_rate": 0.26666666666666666
+      },
+      {
+        "slice_col": "_k_gold",
+        "group": "0",
+        "rows": 40,
+        "rows_with_any_error": 8,
+        "error_rate": 0.2
+      },
+      {
+        "slice_col": "_k_gold",
+        "group": "1",
+        "rows": 105,
+        "rows_with_any_error": 15,
+        "error_rate": 0.14285714285714285
+      }
+    ],
+    "Metin türü (heuristic)": [
+      {
+        "slice_col": "_tw_type",
+        "group": "other",
+        "rows": 8,
+        "rows_with_any_error": 4,
+        "error_rate": 0.5
+      },
+      {
+        "slice_col": "_tw_type",
+        "group": "call_for_help",
+        "rows": 185,
+        "rows_with_any_error": 34,
+        "error_rate": 0.1837837837837838
+      },
+      {
+        "slice_col": "_tw_type",
+        "group": "info_request",
+        "rows": 1,
+        "rows_with_any_error": 0,
+        "error_rate": 0.0
+      }
+    ]
+  },
+  "fp_examples": {
+    "arama_kurtarma": [
+      {
+        "kind": "fp",
+        "label": "arama_kurtarma",
+        "threshold": 0.5999999046325684,
+        "prob": 0.9992976188659668,
+        "gold_labels": [
+          "lojistik"
+        ],
+        "pred_labels": [
+          "arama_kurtarma"
+        ],
+        "text": "ACİLLLL SES DİNLEME ALETİNE İHTİYAÇ VAR ACİLLLLL!!!!!!!!! Antakya Ekinci mahallesi , güneş caddesi , İbrahim elif apartmanı , no18 Zehra karatoyuk #hatayantakya #deprem #afad #SESVARACiL #sesvarEnkaz #ahbab",
+        "id": "1624092271275651095",
+        "aciliyet_0_3": 1
+      },
+      {
+        "kind": "fp",
+        "label": "arama_kurtarma",
+        "threshold": 0.5999999046325684,
+        "prob": 0.9984355568885803,
+        "gold_labels": [],
+        "pred_labels": [
+          "arama_kurtarma"
+        ],
+        "text": "İnsanların umudu tükenmişiz Antakya Gazi Mahallesi. Acilll! #deprem #ENKAZALTİNDAYİM #Hatay https://t.co/bsCchr2zbH",
+        "id": "1622675566666125330",
+        "aciliyet_0_3": 1
+      },
+      {
+        "kind": "fp",
+        "label": "arama_kurtarma",
+        "threshold": 0.5999999046325684,
+        "prob": 0.970238208770752,
+        "gold_labels": [
+          "altyapi",
+          "lojistik"
+        ],
+        "pred_labels": [
+          "arama_kurtarma",
+          "altyapi",
+          "lojistik"
+        ],
+        "text": "Hatay Antakya Atatürk caddesi ürgen paşa mahallesi özköse apartmanı yanında doğalgaz kaçağından patlama oldu ACİL ekip gerekiyor ‼️ @AFADHatay @AFADBaskanlik @ahbap @haluklevent #deprem #enkazaltındayım #hataydeprem",
+        "id": "1622648265995845660",
+        "aciliyet_0_3": 1
+      },
+      {
+        "kind": "fp",
+        "label": "arama_kurtarma",
+        "threshold": 0.5999999046325684,
+        "prob": 0.6202356219291687,
+        "gold_labels": [],
+        "pred_labels": [
+          "arama_kurtarma"
+        ],
+        "text": "Ses var ; 1 kişiden ses var Odabaşı mahallesi Gürses sokak Prestij asi apartmanı Hatay / Antakya 05321511455 Uğur yaşar TAM ADRESİ AŞŞAĞIDA #deprem #afad #sesvar #ahbap #ahbapacil #hatay https://t.co/rHBMySVJJV",
+        "id": "1623351862396059648",
+        "aciliyet_0_3": 0
+      }
+    ],
+    "saglik": [],
+    "barinma": [],
+    "gida_su": [],
+    "altyapi": [],
+    "guvenlik": [
+      {
+        "kind": "fp",
+        "label": "guvenlik",
+        "threshold": 0.7399998903274536,
+        "prob": 0.8713347315788269,
+        "gold_labels": [
+          "arama_kurtarma",
+          "bilgi_paylasimi"
+        ],
+        "pred_labels": [
+          "arama_kurtarma",
+          "guvenlik"
+        ],
+        "text": "Malatya dogansehir kurucaova mahallesi haber alamiyorum. Yurtdisindayim. Teyzelerime ulasamiyorum. Lutfen haber alan varsa bildirsin. Orada yangin ve enkaz oldugu yaziliyor. Haber alan var mi lutfen #deprem #malatya",
+        "id": "1622435007158419456",
+        "aciliyet_0_3": 3
+      }
+    ],
+    "lojistik": [
+      {
+        "kind": "fp",
+        "label": "lojistik",
+        "threshold": 0.9099998474121094,
+        "prob": 0.9986231327056885,
+        "gold_labels": [
+          "arama_kurtarma"
+        ],
+        "pred_labels": [
+          "arama_kurtarma",
+          "lojistik"
+        ],
+        "text": "#İskenderun Mustafa Kemal Mah. 544 ve 550.sokak kesişiminde 36,5671860, 36,1506040 koordinatlarında göçük altında anne Yeşim Parlak, baba Bülent Parlak ve çocukları Öykü Parlak göçük altında hala yardım beklemektedir. #Teyitli #ACİL #HATAY #DEPREMOLDU #deprem https://t.co/cvZsrXlVTj",
+        "id": "1622681485168857093",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fp",
+        "label": "lojistik",
+        "threshold": 0.9099998474121094,
+        "prob": 0.9983232617378235,
+        "gold_labels": [
+          "arama_kurtarma"
+        ],
+        "pred_labels": [
+          "arama_kurtarma",
+          "lojistik"
+        ],
+        "text": "#deprem Turgut Reis Mahallesi Sakarya Caddesi No: 57 Adıyaman / Merkez Enkaz altında en az 5 kişi var acil yardıma ihtiyaç var AFAD ekipleri yok.",
+        "id": "1622641240968658947",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fp",
+        "label": "lojistik",
+        "threshold": 0.9099998474121094,
+        "prob": 0.9980137348175049,
+        "gold_labels": [
+          "arama_kurtarma"
+        ],
+        "pred_labels": [
+          "arama_kurtarma",
+          "lojistik"
+        ],
+        "text": "@alniopulesitivt Sümerevler mahallesi 1709. Sk. 10B Adıyaman Merkez Bozdoğan oteli arkası, hayal cafe üstü ARKADAŞLARIM GÖÇÜK ALTINDALAR. ACİL İŞ MAKİNASI GEREKİYOR. LÜTFEN YARDIM EDİN! @AFADTurkiye @AFADAdiyaman @ahbap #Deprem",
+        "id": "1622901642835132418",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fp",
+        "label": "lojistik",
+        "threshold": 0.9099998474121094,
+        "prob": 0.997277557849884,
+        "gold_labels": [
+          "arama_kurtarma"
+        ],
+        "pred_labels": [
+          "arama_kurtarma",
+          "lojistik"
+        ],
+        "text": "eşi ve eşinin annesi babası da var Hatay armutlu mahallesine lütfen kurtarma ekipleri bir an önce yardım etsin bina adını bilmiyoruz ARMUTLU PAZAR YERİ karşısı 3 çocuklu aile hala enkaz altında dün sesleri duyulmuş bugün ses yok lütfen yardım ulaştırın acil şekilde #deprem",
+        "id": "1623296929483431937",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fp",
+        "label": "lojistik",
+        "threshold": 0.9099998474121094,
+        "prob": 0.9927428960800171,
+        "gold_labels": [],
+        "pred_labels": [
+          "lojistik"
+        ],
+        "text": "Anahtarı olmayan araba için acil çekici ihtiyacımız bulunuyor, yardım edebilecek birini bulabilir miyiz? Konum: Antakya - Ürgenpaşa Mahallesi @AFADBaskanlik @AFADTurkiye @ahbap #deprem #yardım #arabaçekici",
+        "id": "1623951000062025728",
+        "aciliyet_0_3": 1
+      },
+      {
+        "kind": "fp",
+        "label": "lojistik",
+        "threshold": 0.9099998474121094,
+        "prob": 0.9899618625640869,
+        "gold_labels": [
+          "arama_kurtarma",
+          "saglik"
+        ],
+        "pred_labels": [
+          "arama_kurtarma",
+          "saglik",
+          "lojistik"
+        ],
+        "text": "Lütfen yardım edin dün geceden beri enkaz altında arkadaşım ve ailesi yaşıyorlar ama kanamaları var ekipler geliyoruz dedi kimse gelmedi. Hatay/Antakya kuzeytepe mah. Girişi İlhan restorant yanında bina nolur yardım edin. #hatayyardimbekliyor #antakyaACİL #deprem #AFADhatay",
+        "id": "1622899613203144707",
+        "aciliyet_0_3": 3
+      }
+    ],
+    "psikolojik": [],
+    "bilgi_paylasimi": [
+      {
+        "kind": "fp",
+        "label": "bilgi_paylasimi",
+        "threshold": 0.8699998259544373,
+        "prob": 0.9743167161941528,
+        "gold_labels": [],
+        "pred_labels": [
+          "bilgi_paylasimi"
+        ],
+        "text": "Esenlik mahallesi hasan sokak mehdican apt. Antakya / HATAY “HOROZ AİLESİNDEN HABER ALINAMIYOR ORDA OLUP GÖREN VARSA BURAYA YANITLAYABİLİR Mİ ARKADAŞLAR ASKER ARKADAŞIMIN AİLESİ HABER ALAMIYORUZ” #hatay #deprem #AFAD #afad #ACİL #antakya #deprem #iskenderun",
+        "id": "1622479252552617984",
+        "aciliyet_0_3": 1
+      },
+      {
+        "kind": "fp",
+        "label": "bilgi_paylasimi",
+        "threshold": 0.8699998259544373,
+        "prob": 0.9674510955810547,
+        "gold_labels": [
+          "arama_kurtarma"
+        ],
+        "pred_labels": [
+          "arama_kurtarma",
+          "bilgi_paylasimi"
+        ],
+        "text": "Akevler mahallesi 424. sokak Melis apartmanı a blok kat 3 daire 7 Antakya/Hatay *Kaan Yılmaz ve ailesi, göçük altında olduğu düşünülüyor. Bilgi edinebilenler lütfen ulaşsın. #deprem #depremhatay @AFADBaskanlik @DepremDairesi @AFADHatay @sjw_erlik @OguzhanUgur @cerrahpasaIi https://t.co/2UKRb3gyKq",
+        "id": "1622880337230499841",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fp",
+        "label": "bilgi_paylasimi",
+        "threshold": 0.8699998259544373,
+        "prob": 0.9643239974975586,
+        "gold_labels": [],
+        "pred_labels": [
+          "bilgi_paylasimi"
+        ],
+        "text": "Urgenpasa mahallesi 19. Sokak Hatay Antakya haber alamıyorum lütfen yardımcı olur musunuz bilgisi olan yazabilir mi #Hatay #deprem #ACİL",
+        "id": "1622443888425275394",
+        "aciliyet_0_3": 1
+      },
+      {
+        "kind": "fp",
+        "label": "bilgi_paylasimi",
+        "threshold": 0.8699998259544373,
+        "prob": 0.942692756652832,
+        "gold_labels": [],
+        "pred_labels": [
+          "bilgi_paylasimi"
+        ],
+        "text": "Huzurevleri mahallesi 77201 sokak ihsan bayram sitesi Çukurova/Adana Yonca Baycal Ağahan Baycal Esila Baycal (6 yaşında) Azra Baycal (4 aylık) Bir haber olursa lütfen #deprem #ACILYARDIM #seferberlik @haluklevent @OguzhanUgur @Ahbap_Adana @AFAD_Adana",
+        "id": "1623565010927603712",
+        "aciliyet_0_3": 0
+      },
+      {
+        "kind": "fp",
+        "label": "bilgi_paylasimi",
+        "threshold": 0.8699998259544373,
+        "prob": 0.9119471907615662,
+        "gold_labels": [],
+        "pred_labels": [
+          "bilgi_paylasimi"
+        ],
+        "text": "@nediyorsunyasen @DepremDairesi @AFAD_gonullu ❗️ACİLLL❗️ BERAT UZUNESER, KAHRAMANMARAŞ TÜRKOĞLU ŞEKEROBA MAHALLESI saatlerdir haber almaya çalışıyoruz bu çevrede gören bilen olursa bana yazabilir mi? 05530164977 #deprem #acil #Kahramanmaras @DepremDairesi @AFAD_gonullu",
+        "id": "1622708620742852622",
+        "aciliyet_0_3": 1
+      },
+      {
+        "kind": "fp",
+        "label": "bilgi_paylasimi",
+        "threshold": 0.8699998259544373,
+        "prob": 0.8765469789505005,
+        "gold_labels": [],
+        "pred_labels": [
+          "bilgi_paylasimi"
+        ],
+        "text": "Hatayda hâla kendilerinden haber alamıyoruz lütfen yardım edin (09.02.2023) Odabaşı mah 1022 sokak dağ apartmanı hatay/antakya @AKUT_Dernegi @DepremDairesi @AFADBaskanlik #deprem #AFADhatay #YardimEdin",
+        "id": "1623731324484784130",
+        "aciliyet_0_3": 1
+      }
+    ]
+  },
+  "fn_examples": {
+    "arama_kurtarma": [
+      {
+        "kind": "fn",
+        "label": "arama_kurtarma",
+        "threshold": 0.5999999046325684,
+        "prob": 0.04064338281750679,
+        "gold_labels": [
+          "arama_kurtarma"
+        ],
+        "pred_labels": [],
+        "text": "Merkez/Adıyaman bozbey yolu alitaşı mahallesi 1223.sokak Bahçekent sitesi B blok zemin kat yardım gitmemiş, 100 kişi olduğu söyleniyor. @AFADAdiyaman @AFADBaskanlik @ahbap @haluklevent @BabalaTv @OguzhanUgur #deprem #adıyaman #AdiyamanYardimBekliyor #acildeprem https://t.co/qfVU5F5VQb",
+        "id": "1623418967464325123",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fn",
+        "label": "arama_kurtarma",
+        "threshold": 0.5999999046325684,
+        "prob": 0.08875856548547745,
+        "gold_labels": [
+          "arama_kurtarma",
+          "lojistik"
+        ],
+        "pred_labels": [],
+        "text": "ANTAKYA-madencilere ihtiyac var ACİL Ekinci Mahallesi İnönü Bulvarı Alya Uçar Apt. No:128 Binanın altında Tutku Past. No: 0532 744 96 46 ALBAY YUSUF YONCA #deprem #acil",
+        "id": "1624482947301535747",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fn",
+        "label": "arama_kurtarma",
+        "threshold": 0.5999999046325684,
+        "prob": 0.1707354635000229,
+        "gold_labels": [
+          "arama_kurtarma"
+        ],
+        "pred_labels": [],
+        "text": "@uberkuloz #sadıkmurat #hatayyardimbekliyor Antakya Cebrail Mahallesi Emlak Bank Evleri 1. Kisim 6f blok SADIK MURAT IPEK ses veriyormus cevresindekiler teyit etti nolur kardesimize yardim edin sıkısmıs ama gun isigini goruyormus ses veriyormus #deprem @haluklevent @AFADBaskanlik #Hatay",
+        "id": "1622910084291362818",
+        "aciliyet_0_3": 3
+      }
+    ],
+    "saglik": [],
+    "barinma": [
+      {
+        "kind": "fn",
+        "label": "barinma",
+        "threshold": 0.929999828338623,
+        "prob": 0.1714954525232315,
+        "gold_labels": [
+          "barinma"
+        ],
+        "pred_labels": [],
+        "text": "Ailem akrabalarımla dışarıda kalıyor, çok kalabalıklar. 50'den fazla kişiler aralarında 3 bebek, bir yaşlı ve 1 çocuk da var. İlk günden beri yardım alamadılar. Adres: Hatay/ Antakya karaali mahallesi birinci cadde 4.c sokak. İletişim: 05352028207 05538651417 #deprem #Yardim",
+        "id": "1623643555645325312",
+        "aciliyet_0_3": 1
+      }
+    ],
+    "gida_su": [
+      {
+        "kind": "fn",
+        "label": "gida_su",
+        "threshold": 0.13999998569488525,
+        "prob": 0.0016141320811584592,
+        "gold_labels": [
+          "arama_kurtarma",
+          "gida_su",
+          "lojistik"
+        ],
+        "pred_labels": [
+          "arama_kurtarma",
+          "lojistik"
+        ],
+        "text": "@ProfDemirtas @ProfDemirtas Mustafa Kemal mah 575/3 sokak iskenderun/Hatay.Arkadasimin ailesi gocuk altinda.Bina tamamen cokmus.Kurtulanlarin yiyecek ve su gocuk altinda kalanlarin kurtarilmasi icin ise ekipman ve insan gucune ihtiyac var.Lutfen sesimiz olun.Deprem anindan beri yardim yok!",
+        "id": "1622878618564034561",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fn",
+        "label": "gida_su",
+        "threshold": 0.13999998569488525,
+        "prob": 0.001713107107207179,
+        "gold_labels": [
+          "gida_su"
+        ],
+        "pred_labels": [],
+        "text": "BÜYÜKDALYAN MERKEZ MAHALLESİ'NE ACİL YARDIM!! YİYECEK SADECE SU VE BİSKÜVİ VARMIŞ, ULAŞIM İMKANSIZ OLDUĞU İÇİN MERKEZE GELEN HİÇ BİR YARDIM BURAYA GELMEMİŞ!! ULAŞILACAK TELEFON 05327313313 Hatay @AFADBaskanlik @haluklevent #acil #deprem",
+        "id": "1623341986517229570",
+        "aciliyet_0_3": 2
+      }
+    ],
+    "altyapi": [],
+    "guvenlik": [
+      {
+        "kind": "fn",
+        "label": "guvenlik",
+        "threshold": 0.7399998903274536,
+        "prob": 0.11275115609169006,
+        "gold_labels": [
+          "arama_kurtarma",
+          "barinma",
+          "gida_su",
+          "guvenlik"
+        ],
+        "pred_labels": [
+          "arama_kurtarma",
+          "barinma",
+          "gida_su"
+        ],
+        "text": "‼️ ACİL GIDA YİYECEK ÇADIR ‼️ 40 kişi mahsur kalmış durumda. Yardım ulaşamamış aç susuz ve evsizler lütfen yardım edin Turunçlu mah. çağla sk no13 Hatay-Defne Hırsızlar dadanmış, asayiş yok! Süleyman Ertuğrul: 05364801765 @BabalaTv @barisatay @haluklevent @OguzhanUgur #deprem",
+        "id": "1623462499705126912",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fn",
+        "label": "guvenlik",
+        "threshold": 0.7399998903274536,
+        "prob": 0.39898866415023804,
+        "gold_labels": [
+          "guvenlik"
+        ],
+        "pred_labels": [],
+        "text": "İl dışı, deprem bölgesine yakın çalıştığım bir Mah. aradılar, sizi de merak ettik iyi misiniz diye. Millet olarak gerçekten vicdanlı ve sag duyuluyuz. İçimizden yağmacı, dalgaci, fırsatçı üç beş kötü çıksa da, memleketimiz insanı genel olarak iyi kalpli ve yardımseverdir.",
+        "id": "1623636721182154752",
+        "aciliyet_0_3": 2
+      }
+    ],
+    "lojistik": [
+      {
+        "kind": "fn",
+        "label": "lojistik",
+        "threshold": 0.9099998474121094,
+        "prob": 0.0065050553530454636,
+        "gold_labels": [
+          "lojistik"
+        ],
+        "pred_labels": [],
+        "text": "ANTAKYA - FARKLI YAŞAM RENDE SİTESİ Odabaşı Mah. Bektaş Sokak ACİL IŞIKLANDIRMA LAZIM! #hatay #antakyahatay #antakya #deprem #antakyadeprem #antakyadepremi #DepremAcil #ahbaphatay",
+        "id": "1623376743997313041",
+        "aciliyet_0_3": 1
+      },
+      {
+        "kind": "fn",
+        "label": "lojistik",
+        "threshold": 0.9099998474121094,
+        "prob": 0.010132032446563244,
+        "gold_labels": [
+          "arama_kurtarma",
+          "lojistik"
+        ],
+        "pred_labels": [],
+        "text": "ANTAKYA-madencilere ihtiyac var ACİL Ekinci Mahallesi İnönü Bulvarı Alya Uçar Apt. No:128 Binanın altında Tutku Past. No: 0532 744 96 46 ALBAY YUSUF YONCA #deprem #acil",
+        "id": "1624482947301535747",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fn",
+        "label": "lojistik",
+        "threshold": 0.9099998474121094,
+        "prob": 0.013139751739799976,
+        "gold_labels": [
+          "arama_kurtarma",
+          "lojistik"
+        ],
+        "pred_labels": [
+          "arama_kurtarma"
+        ],
+        "text": "ACİİİLLLL!!!!!! Hatay Antakya kuzeytepe mahallesi 13. Sokak no 10 bir aile sıkıştı çıkamıyor itfaiye kepce viryler ara ENKAZ ALTINDA KALANLAR ACİİİLLL YARDIM MÜDAHALE EDİLMESİ GEREKİYOR HATAY #deprem #hatay",
+        "id": "1622436763951157248",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fn",
+        "label": "lojistik",
+        "threshold": 0.9099998474121094,
+        "prob": 0.014036836102604866,
+        "gold_labels": [
+          "arama_kurtarma",
+          "lojistik"
+        ],
+        "pred_labels": [
+          "arama_kurtarma"
+        ],
+        "text": "Hatay İskenderun sanayi Sakarya Mah.288/19. Sok. Özincikent sit. Arkadaşlarım enkazda Hiç kimse yok Siviller kendi imkanları ile çıkarıyor Hayatlarından endişeliyiz arkadaşımın Cocuklarida enkazda🥺 Lütfen adresi dağıtın lütfen 🥺 Bir kardeşimizin isteği😔#deprem #seferberlik",
+        "id": "1622677283684159507",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fn",
+        "label": "lojistik",
+        "threshold": 0.9099998474121094,
+        "prob": 0.018969537690281868,
+        "gold_labels": [
+          "lojistik"
+        ],
+        "pred_labels": [
+          "arama_kurtarma"
+        ],
+        "text": "ACİLLLL SES DİNLEME ALETİNE İHTİYAÇ VAR ACİLLLLL!!!!!!!!! Antakya Ekinci mahallesi , güneş caddesi , İbrahim elif apartmanı , no18 Zehra karatoyuk #hatayantakya #deprem #afad #SESVARACiL #sesvarEnkaz #ahbab",
+        "id": "1624092271275651095",
+        "aciliyet_0_3": 1
+      },
+      {
+        "kind": "fn",
+        "label": "lojistik",
+        "threshold": 0.9099998474121094,
+        "prob": 0.046567779034376144,
+        "gold_labels": [
+          "arama_kurtarma",
+          "lojistik"
+        ],
+        "pred_labels": [
+          "arama_kurtarma"
+        ],
+        "text": "ACİL!! son durum. ARAMA KURTARMA EKİBİNE İHTİYAC VAR. enkaz altinda annesiyle, kardesini vatandaslar ve kendisi ariyor Alitaşı Mahallesi, Ataturk Bulvarı No:100 Özer Apartmanı/ ADIYAMAN #ADIYAMAN #DEPREM https://t.co/pHIksB1Syw",
+        "id": "1623563559098585089",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fn",
+        "label": "lojistik",
+        "threshold": 0.9099998474121094,
+        "prob": 0.1167745590209961,
+        "gold_labels": [
+          "arama_kurtarma",
+          "lojistik"
+        ],
+        "pred_labels": [
+          "arama_kurtarma"
+        ],
+        "text": "Sena Karakus hâla hayatta ses tespit cihazı lazım acil!!! Mimar sinan mahallesi 114 no sokak no:1 Adıyaman/merkez #Adıyaman #deprem #enkaz #yardım",
+        "id": "1623459178088914946",
+        "aciliyet_0_3": 3
+      }
+    ],
+    "psikolojik": [],
+    "bilgi_paylasimi": [
+      {
+        "kind": "fn",
+        "label": "bilgi_paylasimi",
+        "threshold": 0.8699998259544373,
+        "prob": 0.026275634765625,
+        "gold_labels": [
+          "barinma",
+          "bilgi_paylasimi"
+        ],
+        "pred_labels": [
+          "barinma"
+        ],
+        "text": "🚨🚨🚨 ÖNEMLİ! Habertürk canlı yayından iki önemli duyuru: * İstanbul'a gelen tüm depremzedelere gitmek istedikleri yer için ücretsiz transfer: İRTİBAT: 0532 795 75 10 Kahramanmaraş Necip Fazıl Mah. Acil Çadır ihtiyacı. İRTİBAT: Betül Öğretmen 0546 811 22 46 #deprem https://t.co/3azKnAEX4D",
+        "id": "1624930670869880833",
+        "aciliyet_0_3": 2
+      },
+      {
+        "kind": "fn",
+        "label": "bilgi_paylasimi",
+        "threshold": 0.8699998259544373,
+        "prob": 0.027378030121326447,
+        "gold_labels": [
+          "bilgi_paylasimi"
+        ],
+        "pred_labels": [],
+        "text": "atatürk mahallesi Atatürk caddesi no.94 samandağ hatay 🚨🚨 #DEPREMOLDU #deprem #acil #afad #hatay",
+        "id": "1622438179130195969",
+        "aciliyet_0_3": 2
+      },
+      {
+        "kind": "fn",
+        "label": "bilgi_paylasimi",
+        "threshold": 0.8699998259544373,
+        "prob": 0.02977927215397358,
+        "gold_labels": [
+          "bilgi_paylasimi"
+        ],
+        "pred_labels": [],
+        "text": "Adıyaman Gölbaşı Fatih mahallesi meriç caddesi acil destek lütfen @salihro @OguzhanUgur @haluklevent @ahbap @DepremDairesi #deprem #adiyamandeprem #adıyamanafad",
+        "id": "1622706650443382799",
+        "aciliyet_0_3": 2
+      },
+      {
+        "kind": "fn",
+        "label": "bilgi_paylasimi",
+        "threshold": 0.8699998259544373,
+        "prob": 0.18507727980613708,
+        "gold_labels": [
+          "arama_kurtarma",
+          "altyapi",
+          "bilgi_paylasimi"
+        ],
+        "pred_labels": [
+          "arama_kurtarma",
+          "altyapi"
+        ],
+        "text": "@gutitoli ELEKTRİK MAH. AKTAŞ SK. NO: 17 İÇ KAPI NO: 2 DEFNE / HATAY KADİR GÖZTEPE ARKADAŞIMIZDAN VE AİLESİNDEN HABER ALAMIYORUZ LÜTFEN YARDİMCİ OLUN İLETİŞİM BİLGİSİ 0541 494 0618 LÜTFEN GOREN DUYAN YAKİN OLAN YARDİMCİ OLSUN #Hatay #hataydepremi #ENKAZALTİNDAYİM #EnkazBilgisi #deprem",
+        "id": "1622706574450982913",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fn",
+        "label": "bilgi_paylasimi",
+        "threshold": 0.8699998259544373,
+        "prob": 0.41787007451057434,
+        "gold_labels": [
+          "arama_kurtarma",
+          "bilgi_paylasimi"
+        ],
+        "pred_labels": [
+          "arama_kurtarma"
+        ],
+        "text": "ARKADAŞIMIN AİLESİNDEN HABER ALAMIYORUZ GÖÇÜK ALTINDA OLABİLİRLER!! Numune mahallesi ibrahim karaoğlan caddesi Güleryüz apartmanı E5 karayolu üzeri Hatay/İskenderun İLETİŞİM: 05331371908 #DEPREMOLDU #deprem",
+        "id": "1622415491233992708",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fn",
+        "label": "bilgi_paylasimi",
+        "threshold": 0.8699998259544373,
+        "prob": 0.5793766975402832,
+        "gold_labels": [
+          "altyapi",
+          "bilgi_paylasimi"
+        ],
+        "pred_labels": [
+          "altyapi"
+        ],
+        "text": "Elektrik mahallesi yıldız sokak savaşır apartmanı Antakya/Defne. bina yıkılmış aile iceride haber alamıyoruz yakın olan varsa yardım ve bilgi verebilir mi İletişim:0546 533 76 53 #deprem",
+        "id": "1622455571432587264",
+        "aciliyet_0_3": 1
+      },
+      {
+        "kind": "fn",
+        "label": "bilgi_paylasimi",
+        "threshold": 0.8699998259544373,
+        "prob": 0.7522217035293579,
+        "gold_labels": [
+          "bilgi_paylasimi"
+        ],
+        "pred_labels": [],
+        "text": "GAZİANTEP NURDAĞI ATATÜRK MAHALLESİ ATA CADDESİ ALİ KARTAL APARTMANI BİLGİSİ OLAN ACİL ULAŞSIN YAKINIMIZA ULAŞAMIYORUZ #deprem #nurdağı HALA HABER ALAMIYORUZ ÇOK ACİL",
+        "id": "1622466354606493696",
+        "aciliyet_0_3": 1
+      },
+      {
+        "kind": "fn",
+        "label": "bilgi_paylasimi",
+        "threshold": 0.8699998259544373,
+        "prob": 0.7658008933067322,
+        "gold_labels": [
+          "arama_kurtarma",
+          "bilgi_paylasimi"
+        ],
+        "pred_labels": [
+          "arama_kurtarma"
+        ],
+        "text": "#KAHRAMANMARAŞ ARKADAŞIM VE AİLESİ ENKAZ ALTINDA EŞİ VE ÇOCUKLARINI GÖREBİLECEK DURUMDA DEĞİL AİLESİNDEN HABER ALAMIYORUZ ŞARJI SINIRLI DURUMDA İLETİŞİM NUMARASI:05522069583 KAHRAMANMARAŞ/ŞAZİBEY MAH. ASKERLİK ŞUBESİ YANI. GÜVENÇ APT. 7.KAT #DEPREM @AFADKMaras",
+        "id": "1622476915448680449",
+        "aciliyet_0_3": 3
+      },
+      {
+        "kind": "fn",
+        "label": "bilgi_paylasimi",
+        "threshold": 0.8699998259544373,
+        "prob": 0.8400880098342896,
+        "gold_labels": [
+          "arama_kurtarma",
+          "bilgi_paylasimi"
+        ],
+        "pred_labels": [
+          "arama_kurtarma",
+          "guvenlik"
+        ],
+        "text": "Malatya dogansehir kurucaova mahallesi haber alamiyorum. Yurtdisindayim. Teyzelerime ulasamiyorum. Lutfen haber alan varsa bildirsin. Orada yangin ve enkaz oldugu yaziliyor. Haber alan var mi lutfen #deprem #malatya",
+        "id": "1622435007158419456",
+        "aciliyet_0_3": 3
+      }
+    ]
+  },
+  "observations": [
+    {
+      "topic": "`altyapi`: ince destekte F1 ~1.0",
+      "detail": "`altyapi` testte yalnızca 3 pozitifle F1=1.000 veriyor (TP=3, FP=0, FN=0). Tek tahmin bu sayıyı oynatabilir; kalibre bir skor olarak değil, nitel sinyal olarak oku."
+    },
+    {
+      "topic": "`psikolojik`: ince destekte F1 ~1.0",
+      "detail": "`psikolojik` testte yalnızca 1 pozitifle F1=1.000 veriyor (TP=1, FP=0, FN=0). Tek tahmin bu sayıyı oynatabilir; kalibre bir skor olarak değil, nitel sinyal olarak oku."
+    },
+    {
+      "topic": "Yüksek eşikler (≥0.85) — tutucu etiketler",
+      "detail": "CV şu etiketlere çok yüksek eşik seçti: `barinma`=0.93, `lojistik`=0.91, `saglik`=0.90, `bilgi_paylasimi`=0.87, `psikolojik`=0.86. Bu etiketler yalnızca model çok eminken ateşliyor; bu precision'ı korur ama belirsiz pozitifleri kaçırır (FN riski)."
+    },
+    {
+      "topic": "Düşük eşikler (≤0.25) — agresif etiketler",
+      "detail": "CV şu etiketlere çok düşük eşik seçti: `gida_su`=0.14. Bu etiketler zayıf sinyalde bile ateşliyor; recall yüksek, precision düşük (FP riski)."
+    },
+    {
+      "topic": "`lojistik` kaçırıldığında model sıkça `arama_kurtarma` diyor",
+      "detail": "`lojistik` için 5/7 FN satırında `arama_kurtarma` predicted=1 — iki etiket arasında sınır bulanık."
+    },
+    {
+      "topic": "`bilgi_paylasimi` kaçırıldığında model sıkça `arama_kurtarma` diyor",
+      "detail": "`bilgi_paylasimi` için 4/9 FN satırında `arama_kurtarma` predicted=1 — iki etiket arasında sınır bulanık."
+    },
+    {
+      "topic": "`arama_kurtarma` yanlış ateşlediğinde gold'da sıkça `lojistik` var",
+      "detail": "`arama_kurtarma` için 2/4 FP satırında gerçek etiket `lojistik` idi — model `lojistik` benzeri dili `arama_kurtarma` olarak etiketliyor."
+    },
+    {
+      "topic": "`lojistik` yanlış ateşlediğinde gold'da sıkça `arama_kurtarma` var",
+      "detail": "`lojistik` için 5/6 FP satırında gerçek etiket `arama_kurtarma` idi — model `arama_kurtarma` benzeri dili `lojistik` olarak etiketliyor."
+    }
+  ],
+  "top_patterns": [
+    "`bilgi_paylasimi` kaçırıldığında modelin en sık önerdiği etiket `arama_kurtarma` — 4/9 FN satırında `arama_kurtarma` ateşledi; bu iki etiket arasında sınır bulanık.",
+    "`bilgi_paylasimi` için CV eşiği çok yüksek (thr=0.87); recall=0.64 ile FN=9 — threshold kalibrasyonu tutucu, eşik düşürmek FN'i azaltabilir ama FP riski var.",
+    "`lojistik` kaçırıldığında modelin en sık önerdiği etiket `arama_kurtarma` — 5/7 FN satırında `arama_kurtarma` ateşledi; bu iki etiket arasında sınır bulanık.",
+    "`lojistik` yanlış ateşlediğinde gold'da en sık `arama_kurtarma` bulunuyor — 5/6 FP satırında `arama_kurtarma` gerçek pozitifti; model `arama_kurtarma`-benzeri dili `lojistik` olarak etiketliyor.",
+    "`arama_kurtarma` yanlış ateşlediğinde gold'da en sık `lojistik` bulunuyor — 2/4 FP satırında `lojistik` gerçek pozitifti; model `lojistik`-benzeri dili `arama_kurtarma` olarak etiketliyor.",
+    "`altyapi` F1=1.000 ama test pozitif sayısı yalnızca 3; tek tahmin F1'i dramatik oynatır, bu yüksek skoru kalibre bir başarı olarak okuma.",
+    "`psikolojik` F1=1.000 ama test pozitif sayısı yalnızca 1; tek tahmin F1'i dramatik oynatır, bu yüksek skoru kalibre bir başarı olarak okuma."
+  ],
+  "step9_suggestions": [
+    "Step 9 (seçim/çıkarım) öncesinde, `bilgi_paylasimi` ve `guvenlik` için eşik duyarlılığını sensitivity-plot ile dökümante et (CV thresholds sabit kalsa da production'da neyi feda ettiğimizi bilelim).",
+    "`bilgi_paylasimi`: eşik 0.87 ile recall=0.64 — step 9'da ayrı bir `threshold_production.json` üretip recall-öncelikli senaryoda daha düşük eşik dene (ama bu scoreboard'u değiştirmez).",
+    "Rare etiketler (`altyapi`, `psikolojik`) için step 9 raporuna confidence interval ekleyerek tek-tahmin saturasyonunu açıkça belirt.",
+    "Step 7 leak-free kapsamı id-seviyesiydi; step 9'dan önce silver ↔ gold **içerik** örtüşmesini (char n-gram veya normalize metin hash) ölç ve raporla; near-duplicate kalıntı varsa dokümante et.",
+    "`bilgi_paylasimi` F1 exp3'te exp1'in altında kaldı — step 9'da etiket tanımı review et (arama çağrısı vs bilgi çağrısı sınırı) ve gerekirse annotation guideline'a küçük bir not düş.",
+    "FN örneklerini gözle inceleyip potansiyel annotation hatalarını işaretle; tespit edilenleri bir `gold_review_candidates.csv` olarak saklayıp step 10/11 için bekleme listesine koy."
+  ],
+  "emphasis_labels": [
+    "altyapi",
+    "guvenlik",
+    "psikolojik",
+    "bilgi_paylasimi"
+  ],
+  "leak_free_caveat": "Step 7 v3 id-level silver→gold leakage kapatıldı; ancak content-level (exact-text / near-duplicate) örtüşme riski tamamen ölçülmedi. Bu rapordaki yüksek per-label F1 değerleri (özellikle rare etiketler) bu sınır hatırlanarak okunmalı."
+}
