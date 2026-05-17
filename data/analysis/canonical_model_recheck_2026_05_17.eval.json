@@ -1,0 +1,43 @@
+{
+  "f1_micro": 0.8997555012224939,
+  "f1_macro": 0.8753215924052317,
+  "precision_micro": 0.9154228855721394,
+  "recall_micro": 0.8846153846153846,
+  "f1_per_label": {
+    "arama_kurtarma": 0.968609865470852,
+    "saglik": 1.0,
+    "barinma": 0.9565217391304348,
+    "gida_su": 0.8888888888888888,
+    "altyapi": 1.0,
+    "guvenlik": 0.5714285714285714,
+    "lojistik": 0.8115942028985508,
+    "psikolojik": 1.0,
+    "bilgi_paylasimi": 0.6808510638297872
+  },
+  "threshold": 0.5,
+  "thresholds_per_label": {
+    "arama_kurtarma": 0.5999999046325684,
+    "saglik": 0.8999998569488525,
+    "barinma": 0.929999828338623,
+    "gida_su": 0.13999998569488525,
+    "altyapi": 0.729999840259552,
+    "guvenlik": 0.7399998903274536,
+    "lojistik": 0.9099998474121094,
+    "psikolojik": 0.8599998354911804,
+    "bilgi_paylasimi": 0.8699998259544373
+  },
+  "rows": 194,
+  "labels": [
+    "arama_kurtarma",
+    "saglik",
+    "barinma",
+    "gida_su",
+    "altyapi",
+    "guvenlik",
+    "lojistik",
+    "psikolojik",
+    "bilgi_paylasimi"
+  ],
+  "csv": "data/modeling/need_classification_gold_combined/test.csv",
+  "model_dir": "models/exp3_silver_then_gold_v3_exgold/final"
+}
