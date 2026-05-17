@@ -19,6 +19,7 @@ release/need_classifier_v2/
 ├── thresholds/
 │   ├── thresholds_cv.json            — CV-tuned per-label eşikler (uygulanan)
 │   └── threshold_tuning_cv_meta.json — tuning provenance
+├── postprocess_info_v1.json          — validated bilgi_paylasimi inference assist
 ├── docs/
 │   ├── metrics_summary.md            — canonical test metrikleri
 │   ├── selection_summary.md          — seçim gerekçesi (kısa)
@@ -39,6 +40,7 @@ release/need_classifier_v2/
 - **Base**: `dbmdz/bert-base-turkish-cased`
 - **Head**: 9-label multilabel (sigmoid)
 - **Thresholds**: `thresholds/thresholds_cv.json` (per-label, CV-tuned, OOF global)
+- **Postprocess**: `postprocess_info_v1.json` (default inference layer; exact baseline için kapatılabilir)
 - **Selection pointer**: [../../models/final/selection.json](../../models/final/selection.json)
 
 ## Canonical test metrikleri
@@ -78,7 +80,9 @@ python scripts/predict_need_classifier.py \
   --thresholds-json models/exp3_silver_then_gold_v3_exgold/thresholds_cv.json \
   --input data/processed/emergency_geolocated_96k.csv \
   --output data/predictions/need_predictions_geolocated_v2_final.csv \
-  --dedup-by-id --batch-size 128
+  --dedup-by-id \
+  --postprocess-profile info_v1 \
+  --batch-size 128
 python scripts/finalize_prediction_metadata.py
 python scripts/prediction_qa_v2_final.py
 ```

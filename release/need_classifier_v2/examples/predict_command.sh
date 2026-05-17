@@ -14,6 +14,7 @@ python scripts/predict_need_classifier.py \
   --input data/processed/emergency_geolocated_96k.csv \
   --output data/predictions/need_predictions_geolocated_v2_final.csv \
   --dedup-by-id \
+  --postprocess-profile info_v1 \
   --batch-size 128
 
 python scripts/finalize_prediction_metadata.py

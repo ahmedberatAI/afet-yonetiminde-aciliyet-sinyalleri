@@ -1,0 +1,238 @@
+{
+  "profile": "info_v1",
+  "min_probability": 0.2,
+  "rule": "Add bilgi_paylasimi when prob>=0.20 and strong info-sharing text signal is present.",
+  "labels": [
+    "arama_kurtarma",
+    "saglik",
+    "barinma",
+    "gida_su",
+    "altyapi",
+    "guvenlik",
+    "lojistik",
+    "psikolojik",
+    "bilgi_paylasimi"
+  ],
+  "thresholds": {
+    "arama_kurtarma": 0.5999999046325684,
+    "saglik": 0.8999998569488525,
+    "barinma": 0.929999828338623,
+    "gida_su": 0.13999998569488525,
+    "altyapi": 0.729999840259552,
+    "guvenlik": 0.7399998903274536,
+    "lojistik": 0.9099998474121094,
+    "psikolojik": 0.8599998354911804,
+    "bilgi_paylasimi": 0.8699998259544373
+  },
+  "decision_surfaces": [
+    "oof",
+    "validation"
+  ],
+  "test_usage": "reported as regression check only",
+  "datasets": [
+    {
+      "name": "oof",
+      "rows": 1740,
+      "base": {
+        "overall": {
+          "precision_micro": 0.9149400218102508,
+          "recall_micro": 0.9026358257127488,
+          "f1_micro": 0.9087462767397779,
+          "f1_macro": 0.8143357099361697
+        },
+        "bilgi_paylasimi": {
+          "tp": 181,
+          "fp": 33,
+          "fn": 54,
+          "tn": 1472,
+          "precision": 0.8457943925233645,
+          "recall": 0.7702127659574468,
+          "f1": 0.8062360801781738,
+          "support": 235,
+          "predicted_positive": 214
+        },
+        "guvenlik": {
+          "tp": 25,
+          "fp": 7,
+          "fn": 10,
+          "tn": 1698,
+          "precision": 0.78125,
+          "recall": 0.7142857142857143,
+          "f1": 0.7462686567164178,
+          "support": 35,
+          "predicted_positive": 32
+        }
+      },
+      "info_v1": {
+        "overall": {
+          "precision_micro": 0.9085106382978724,
+          "recall_micro": 0.9187735341581496,
+          "f1_micro": 0.9136132655790318,
+          "f1_macro": 0.8194789513080674
+        },
+        "bilgi_paylasimi": {
+          "tp": 211,
+          "fp": 49,
+          "fn": 24,
+          "tn": 1456,
+          "precision": 0.8115384615384615,
+          "recall": 0.8978723404255319,
+          "f1": 0.8525252525252525,
+          "support": 235,
+          "predicted_positive": 260
+        },
+        "guvenlik": {
+          "tp": 25,
+          "fp": 7,
+          "fn": 10,
+          "tn": 1698,
+          "precision": 0.78125,
+          "recall": 0.7142857142857143,
+          "f1": 0.7462686567164178,
+          "support": 35,
+          "predicted_positive": 32
+        },
+        "postprocess": {
+          "rule_hits": 242,
+          "predictions_added": 46
+        }
+      }
+    },
+    {
+      "name": "validation",
+      "rows": 193,
+      "base": {
+        "overall": {
+          "precision_micro": 0.9179487179487179,
+          "recall_micro": 0.8905472636815921,
+          "f1_micro": 0.9040404040404041,
+          "f1_macro": 0.8312642987802116
+        },
+        "bilgi_paylasimi": {
+          "tp": 27,
+          "fp": 2,
+          "fn": 8,
+          "tn": 156,
+          "precision": 0.9310344827586207,
+          "recall": 0.7714285714285715,
+          "f1": 0.8437500000000001,
+          "support": 35,
+          "predicted_positive": 29
+        },
+        "guvenlik": {
+          "tp": 6,
+          "fp": 0,
+          "fn": 1,
+          "tn": 186,
+          "precision": 1.0,
+          "recall": 0.8571428571428571,
+          "f1": 0.923076923076923,
+          "support": 7,
+          "predicted_positive": 6
+        }
+      },
+      "info_v1": {
+        "overall": {
+          "precision_micro": 0.9203980099502488,
+          "recall_micro": 0.9203980099502488,
+          "f1_micro": 0.9203980099502488,
+          "f1_macro": 0.8422762035421163
+        },
+        "bilgi_paylasimi": {
+          "tp": 33,
+          "fp": 2,
+          "fn": 2,
+          "tn": 156,
+          "precision": 0.9428571428571428,
+          "recall": 0.9428571428571428,
+          "f1": 0.9428571428571428,
+          "support": 35,
+          "predicted_positive": 35
+        },
+        "guvenlik": {
+          "tp": 6,
+          "fp": 0,
+          "fn": 1,
+          "tn": 186,
+          "precision": 1.0,
+          "recall": 0.8571428571428571,
+          "f1": 0.923076923076923,
+          "support": 7,
+          "predicted_positive": 6
+        },
+        "postprocess": {
+          "rule_hits": 39,
+          "predictions_added": 6
+        }
+      }
+    },
+    {
+      "name": "test_regression_check",
+      "rows": 194,
+      "base": {
+        "overall": {
+          "precision_micro": 0.9154228855721394,
+          "recall_micro": 0.8846153846153846,
+          "f1_micro": 0.8997555012224939,
+          "f1_macro": 0.8753215924052317
+        },
+        "bilgi_paylasimi": {
+          "tp": 16,
+          "fp": 6,
+          "fn": 9,
+          "tn": 163,
+          "precision": 0.7272727272727273,
+          "recall": 0.64,
+          "f1": 0.6808510638297872,
+          "support": 25,
+          "predicted_positive": 22
+        },
+        "guvenlik": {
+          "tp": 2,
+          "fp": 1,
+          "fn": 2,
+          "tn": 189,
+          "precision": 0.6666666666666666,
+          "recall": 0.5,
+          "f1": 0.5714285714285715,
+          "support": 4,
+          "predicted_positive": 3
+        }
+      },
+      "info_v1": {
+        "overall": {
+          "precision_micro": 0.912621359223301,
+          "recall_micro": 0.9038461538461539,
+          "f1_micro": 0.9082125603864736,
+          "f1_macro": 0.8851415596720075
+        },
+        "bilgi_paylasimi": {
+          "tp": 20,
+          "fp": 7,
+          "fn": 5,
+          "tn": 162,
+          "precision": 0.7407407407407407,
+          "recall": 0.8,
+          "f1": 0.7692307692307692,
+          "support": 25,
+          "predicted_positive": 27
+        },
+        "guvenlik": {
+          "tp": 2,
+          "fp": 1,
+          "fn": 2,
+          "tn": 189,
+          "precision": 0.6666666666666666,
+          "recall": 0.5,
+          "f1": 0.5714285714285715,
+          "support": 4,
+          "predicted_positive": 3
+        },
+        "postprocess": {
+          "rule_hits": 27,
+          "predictions_added": 5
+        }
+      }
+    }
+  ]
+}

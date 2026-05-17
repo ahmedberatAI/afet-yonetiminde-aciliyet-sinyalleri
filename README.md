@@ -13,6 +13,7 @@ Bu proje, deprem dönemlerinde sosyal medyada paylaşılan yardım içerikli twe
 - **Sürüm tag**: `v2_final_leakfree_exp3`
 - **Seçilen model**: `exp3_silver_then_gold_v3_exgold` (silver pretrain → gold fine-tune, leak-free v3 silver)
 - **Canonical test** (194 satır, gold): f1_micro=0.8998, f1_macro=0.8753
+- **Validated inference postprocess**: `info_v1` (`bilgi_paylasimi` recall assist, OOF + validation destekli)
 - **Canonical tahmin**: `data/predictions/need_predictions_geolocated_v2_final.csv` (63,180 satır, 96,071 girdiden dedup sonrası)
 - **Release paket**: `release/need_classifier_v2/`
 
@@ -86,7 +87,9 @@ python scripts/predict_need_classifier.py `
   --thresholds-json models/exp3_silver_then_gold_v3_exgold/thresholds_cv.json `
   --input data/processed/emergency_geolocated_96k.csv `
   --output data/predictions/need_predictions_geolocated_v2_final.csv `
-  --dedup-by-id --batch-size 128
+  --dedup-by-id `
+  --postprocess-profile info_v1 `
+  --batch-size 128
 
 # 4) Metadata finalize + QA
 python scripts/finalize_prediction_metadata.py
@@ -123,9 +126,9 @@ dashboard için yalnızca canonical v2 final çıktıları kullanılmalıdır:
   ~%30 near-dup düzeyinde. Rapor edilen test F1'inin ~0.01–0.02 üstten tamponlu olabileceği
   makul varsayılmalı; bu residual risk `docs/final_model_selection.md` ve
   `release/need_classifier_v2/docs/known_limitations.md` içinde belgelendi.
-- **Zayıf etiketler**: `guvenlik` (F1=0.571), `bilgi_paylasimi` (F1=0.681). CV eşikleri
-  production'da recall feda ediyor; ihtiyaç halinde ayrı bir `threshold_production.json`
-  tasarlanabilir.
+- **Zayıf etiketler**: `guvenlik` (F1=0.571), `bilgi_paylasimi` (raw F1=0.681).
+  `bilgi_paylasimi` için `info_v1` postprocess profili OOF + validation üzerinde doğrulandı;
+  exact raw-threshold davranışı için `--postprocess-profile none` kullanılabilir.
 - **Rare-label F1=1.0 değerleri** (`altyapi`, `saglik`, `psikolojik`) küçük test destekli
   (1–7 pozitif) ve kalibre başarı değildir — tek-tahmin saturasyonudur.
 - **Havuz prior'ı**: `emergency_geolocated_96k.csv` "acil yardım + konum" filtresinden geçmiş

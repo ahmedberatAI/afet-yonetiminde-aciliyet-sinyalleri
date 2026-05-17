@@ -12,7 +12,9 @@ konumlandırılmamıştır.
 from __future__ import annotations
 
 import json
+import re
 import sys
+import unicodedata
 from pathlib import Path
 from typing import Dict, List, Tuple
 
@@ -27,6 +29,20 @@ REPO_ROOT = RELEASE_DIR.parents[1]                         # repo root
 MODEL_DIR = REPO_ROOT / "models" / "exp3_silver_then_gold_v3_exgold" / "final"
 LABELS_JSON = RELEASE_DIR / "label_columns.json"
 THRESHOLDS_JSON = RELEASE_DIR / "thresholds" / "thresholds_cv.json"
+INFO_POSTPROCESS_MIN_PROB = 0.20
+INFO_MISSING_RE = re.compile(
+    r"(haber\s+alam|haber\s+al[ıi]nam|ula[şs]am[ıi]yor|ula[şs][ıi]lam[ıi]yor)",
+    flags=re.IGNORECASE,
+)
+INFO_REQUEST_RE = re.compile(
+    r"(g[oö]ren|duyan|bilen|bilgisi\s+olan|bilgi\s+alan|haber\s+alan|ula[şs]s[ıi]n|yazs[ıi]n|bildirsin)",
+    flags=re.IGNORECASE,
+)
+INFO_CONTACT_RE = re.compile(r"(ileti[şs]im|irtibat|telefon|numara|0\d{10}|05\d{9})", flags=re.IGNORECASE)
+INFO_ANNOUNCEMENT_RE = re.compile(
+    r"(duyuru|canl[ıi]\s+yay[ıi]n|transfer|da[ğg][ıi]t[ıi]m|ula[şs]t[ıi]r[ıi]ld[ıi]|bildirilsin)",
+    flags=re.IGNORECASE,
+)
 
 
 def load_model() -> Tuple[AutoTokenizer, AutoModelForSequenceClassification, List[str], Dict[str, float]]:
@@ -39,6 +55,29 @@ def load_model() -> Tuple[AutoTokenizer, AutoModelForSequenceClassification, Lis
     return tok, mdl, labels, thresholds
 
 
+def _normalize_rule_text(text: str) -> str:
+    s = unicodedata.normalize("NFC", str(text or "")).casefold()
+    return " ".join(s.split())
+
+
+def _has_info_postprocess_signal(text: str) -> bool:
+    t = _normalize_rule_text(text)
+    missing = bool(INFO_MISSING_RE.search(t))
+    request = bool(INFO_REQUEST_RE.search(t))
+    contact = bool(INFO_CONTACT_RE.search(t))
+    announcement = bool(INFO_ANNOUNCEMENT_RE.search(t))
+    return (missing and request) or (missing and contact) or (request and contact) or announcement
+
+
+def apply_info_v1_postprocess(text: str, labels: List[str], probs: np.ndarray, preds: Dict[str, int]) -> None:
+    if "bilgi_paylasimi" not in labels:
+        return
+    j = labels.index("bilgi_paylasimi")
+    if preds.get("bilgi_paylasimi", 0) == 0 and probs[j] >= INFO_POSTPROCESS_MIN_PROB:
+        if _has_info_postprocess_signal(text):
+            preds["bilgi_paylasimi"] = 1
+
+
 def predict(
     texts: List[str],
     tok: AutoTokenizer,
@@ -47,6 +86,7 @@ def predict(
     thresholds: Dict[str, float],
     max_length: int = 192,
     device: str = "cuda" if torch.cuda.is_available() else "cpu",
+    postprocess_profile: str = "info_v1",
 ) -> List[Dict[str, object]]:
     mdl = mdl.to(device)
     enc = tok(
@@ -67,6 +107,10 @@ def predict(
             p = float(probs[i, j])
             row["probs"][lab] = p
             row["preds"][lab] = int(p >= thresholds[lab])
+        if postprocess_profile == "info_v1":
+            apply_info_v1_postprocess(text, labels, probs[i], row["preds"])
+        elif postprocess_profile != "none":
+            raise ValueError(f"Unsupported postprocess_profile: {postprocess_profile}")
         row["pred_label_count"] = int(sum(row["preds"].values()))
         row["pred_any_need"] = int(row["pred_label_count"] >= 1)
         out.append(row)

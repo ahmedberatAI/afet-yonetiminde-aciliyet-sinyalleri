@@ -29,8 +29,10 @@ Release tüketicileri karar vermeden önce okumalı.
 - CV eşiği 0.87 çok tutucu.
 - 9 FN'den 4'ü model "arama_kurtarma" dediği için oluştu.
 - "Haber alamıyoruz, gören var mı" tarzı ifadeler sistematik olarak `arama_kurtarma`'ya kayıyor.
-- Bu bir etiket-tanımı / threshold sorunu; production için ayrı recall-öncelikli eşik
-  değerlendirilebilir.
+- `info_v1` postprocess profili bu zayıflığı kısmen azaltır: canonical eşikleri korur,
+  güçlü bilgi-paylaşımı dilinde ve `prob_bilgi_paylasimi >= 0.20` iken etiketi ekler.
+- Bu yine de veri/guideline problemini çözmez; "haber alamıyoruz / gören duyan var mı"
+  alt tipi yeni gold örneklerle güçlendirilmeli.
 
 ## 4) Rare-label F1=1.0 saturation
 
@@ -72,6 +74,6 @@ Release tüketicileri karar vermeden önce okumalı.
 | # | öneri | etki |
 |---|---|---|
 | 1 | Silver'da content-level dedup + retrain | genelleme tamponunu kapatır |
-| 2 | `guvenlik`, `bilgi_paylasimi` için recall-öncelikli ayrı eşik | production coverage |
+| 2 | `bilgi_paylasimi` için `info_v1` postprocess + yeni gold örnek | production coverage |
 | 3 | Rare-label için hedefli annotation turu (güvenlik +50 pozitif gibi) | metriği kalibre eder |
 | 4 | Test set genişletme (194 → 500+ satır) | CI daraltır |

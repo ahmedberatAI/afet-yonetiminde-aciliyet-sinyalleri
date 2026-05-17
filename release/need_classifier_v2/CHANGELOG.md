@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v2_final_leakfree_exp3 + info_v1 postprocess - 2026-05-17
+
+- Added validated inference-layer postprocess profile `info_v1` for `bilgi_paylasimi`.
+- Rule: keep canonical CV thresholds, then add `bilgi_paylasimi` when
+  `prob_bilgi_paylasimi >= 0.20` and strong information-sharing language is present.
+- OOF + validation both improved; test is reported only as regression check.
+- Raw-threshold reproduction remains available with `--postprocess-profile none`.
+
 ## v2_final_leakfree_exp3 — 2026-04-21
 
 - **selected_experiment_key**: `exp3_silver_then_gold_v3_exgold`

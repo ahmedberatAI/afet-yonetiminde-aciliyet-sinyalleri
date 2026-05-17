@@ -1,0 +1,22 @@
+{
+  "profile": "info_v1",
+  "status": "validated_inference_layer",
+  "target_label": "bilgi_paylasimi",
+  "min_probability": 0.2,
+  "description": "After applying canonical CV thresholds, add bilgi_paylasimi when prob_bilgi_paylasimi >= 0.20 and the text has a strong missing-news / information-request / contact / announcement signal.",
+  "decision_surfaces": [
+    "models/exp3_silver_then_gold_v3_exgold/threshold_tuning_cv_oof.csv",
+    "data/modeling/need_classification_gold_combined/val.csv"
+  ],
+  "validation_artifacts": {
+    "md": "data/analysis/postprocess_info_v1_validation_2026_05_17.md",
+    "json": "data/analysis/postprocess_info_v1_validation_2026_05_17.json"
+  },
+  "baseline_escape_hatch": "Use --postprocess-profile none for exact raw-threshold reproduction.",
+  "rule_patterns": {
+    "missing_news": "(haber\\s+alam|haber\\s+al[ıi]nam|ula[şs]am[ıi]yor|ula[şs][ıi]lam[ıi]yor)",
+    "info_request": "(g[oö]ren|duyan|bilen|bilgisi\\s+olan|bilgi\\s+alan|haber\\s+alan|ula[şs]s[ıi]n|yazs[ıi]n|bildirsin)",
+    "contact": "(ileti[şs]im|irtibat|telefon|numara|0\\d{10}|05\\d{9})",
+    "announcement": "(duyuru|canl[ıi]\\s+yay[ıi]n|transfer|da[ğg][ıi]t[ıi]m|ula[şs]t[ıi]r[ıi]ld[ıi]|bildirilsin)"
+  }
+}

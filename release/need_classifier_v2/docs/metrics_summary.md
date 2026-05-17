@@ -29,6 +29,21 @@
 | psikolojik | 1 | 0.86 | 1.000 | **rare-label saturation** (tek pozitif) |
 | bilgi_paylasimi | 25 | 0.87 | **0.681** | **zayıf** (CV eşiği çok tutucu) |
 
+## Inference-layer postprocess (`info_v1`)
+
+`info_v1` canonical eşiği değiştirmez; güçlü bilgi-paylaşımı dili yakalandığında ve
+`prob_bilgi_paylasimi >= 0.20` olduğunda `bilgi_paylasimi` etiketini ekler. Seçim OOF +
+validation üzerinde yapıldı; test yalnızca regresyon kontrolü olarak raporlandı.
+
+| dataset | base micro F1 | info_v1 micro F1 | base bilgi F1 | info_v1 bilgi F1 |
+|---|---:|---:|---:|---:|
+| OOF | 0.9087 | 0.9136 | 0.8062 | 0.8525 |
+| validation | 0.9040 | 0.9204 | 0.8438 | 0.9429 |
+| test (regression check) | 0.8998 | 0.9082 | 0.6809 | 0.7692 |
+
+Kanıt: [postprocess_info_v1_validation_2026_05_17.md](../../../data/analysis/postprocess_info_v1_validation_2026_05_17.md).
+Exact baseline için `--postprocess-profile none` kullanılabilir.
+
 ## Ranking (v3 leak-free comparison)
 
 | rank | experiment_key | f1_micro | f1_macro |

@@ -10,6 +10,7 @@ python scripts/predict_need_classifier.py \
   --input data/processed/emergency_geolocated_96k.csv \
   --output data/predictions/need_predictions_geolocated_v2_final.csv \
   --dedup-by-id \
+  --postprocess-profile info_v1 \
   --batch-size 128
 
 python scripts/finalize_prediction_metadata.py
@@ -66,9 +67,23 @@ Tam schema ve label↔column mapping: `need_predictions_geolocated_v2_final.meta
 
 - **`thresholds_cv.json` per-label değerlerini kullanın.**
 - `meta.threshold_global_fallback=0.5` değeri **uygulanmadı**; sadece bir fallback parametre adıdır.
+- Varsayılan inference katmanı artık `--postprocess-profile info_v1` uygular. Bu profil
+  canonical eşikleri değiştirmez; yalnızca güçlü bilgi-paylaşımı dili varsa ve
+  `prob_bilgi_paylasimi >= 0.20` ise `pred_bilgi_paylasimi=1` yapar.
+- Exact raw-threshold reproduksiyon için `--postprocess-profile none` kullanın.
 - Production için daha recall-öncelikli bir ayar isterseniz (özellikle `guvenlik`, `bilgi_paylasimi`),
   `thresholds/threshold_tuning_cv_meta.json` içinde OOF F1/precision/recall eğrisine bakın ve
   ayrı bir `threshold_production.json` türetin — bu release bu varyantı içermez.
+
+## 4.1) Postprocess `info_v1`
+
+`info_v1` bir model ağırlığı değişikliği değildir; inference sonunda uygulanan küçük,
+geri alınabilir bir kuraldır. OOF + validation üzerinde birlikte iyileştiği için
+release adapter ve predict scriptinde varsayılan açıktır.
+
+Kanıt:
+- [postprocess_info_v1_validation_2026_05_17.md](../../data/analysis/postprocess_info_v1_validation_2026_05_17.md)
+- [postprocess_info_v1.json](../postprocess_info_v1.json)
 
 ## 5) Üretim girdi gereksinimleri
 

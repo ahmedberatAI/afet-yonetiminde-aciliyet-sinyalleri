@@ -21,6 +21,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
+import unicodedata
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -41,6 +43,21 @@ DEFAULT_KEEP_COLS: List[str] = [
     "tweet_clean",
 ]
 
+INFO_POSTPROCESS_MIN_PROB = 0.20
+INFO_MISSING_RE = re.compile(
+    r"(haber\s+alam|haber\s+al[ıi]nam|ula[şs]am[ıi]yor|ula[şs][ıi]lam[ıi]yor)",
+    flags=re.IGNORECASE,
+)
+INFO_REQUEST_RE = re.compile(
+    r"(g[oö]ren|duyan|bilen|bilgisi\s+olan|bilgi\s+alan|haber\s+alan|ula[şs]s[ıi]n|yazs[ıi]n|bildirsin)",
+    flags=re.IGNORECASE,
+)
+INFO_CONTACT_RE = re.compile(r"(ileti[şs]im|irtibat|telefon|numara|0\d{10}|05\d{9})", flags=re.IGNORECASE)
+INFO_ANNOUNCEMENT_RE = re.compile(
+    r"(duyuru|canl[ıi]\s+yay[ıi]n|transfer|da[ğg][ıi]t[ıi]m|ula[şs]t[ıi]r[ıi]ld[ıi]|bildirilsin)",
+    flags=re.IGNORECASE,
+)
+
 
 def _sigmoid(x: np.ndarray) -> np.ndarray:
     out = np.empty_like(x, dtype=np.float32)
@@ -49,6 +66,63 @@ def _sigmoid(x: np.ndarray) -> np.ndarray:
     expx = np.exp(x[~pos])
     out[~pos] = expx / (1.0 + expx)
     return out
+
+
+def _normalize_rule_text(text: str) -> str:
+    s = unicodedata.normalize("NFC", str(text or "")).casefold()
+    return " ".join(s.split())
+
+
+def _has_info_postprocess_signal(text: str) -> bool:
+    """Validated info_v1 signal for `bilgi_paylasimi` recall assist.
+
+    OOF + validation checks showed that this high-precision language pattern
+    can safely recover some `bilgi_paylasimi` misses when the model already has
+    a non-trivial probability for that label.
+    """
+
+    t = _normalize_rule_text(text)
+    missing = bool(INFO_MISSING_RE.search(t))
+    request = bool(INFO_REQUEST_RE.search(t))
+    contact = bool(INFO_CONTACT_RE.search(t))
+    announcement = bool(INFO_ANNOUNCEMENT_RE.search(t))
+    return (missing and request) or (missing and contact) or (request and contact) or announcement
+
+
+def _apply_postprocess_profile(
+    *,
+    profile: str,
+    texts: List[str],
+    label_cols: List[str],
+    probs: np.ndarray,
+    y_pred: np.ndarray,
+) -> tuple[np.ndarray, Dict[str, Any]]:
+    if profile == "none":
+        return y_pred, {"profile": "none", "applied": False}
+    if profile != "info_v1":
+        raise SystemExit(f"Unsupported --postprocess-profile: {profile}")
+
+    if "bilgi_paylasimi" not in label_cols:
+        return y_pred, {"profile": profile, "applied": False, "reason": "label_missing"}
+
+    out = y_pred.copy()
+    j = label_cols.index("bilgi_paylasimi")
+    rule_hits = np.array([_has_info_postprocess_signal(t) for t in texts], dtype=bool)
+    added = (out[:, j] == 0) & (probs[:, j] >= INFO_POSTPROCESS_MIN_PROB) & rule_hits
+    out[added, j] = 1
+    return out, {
+        "profile": profile,
+        "applied": True,
+        "label": "bilgi_paylasimi",
+        "min_probability": INFO_POSTPROCESS_MIN_PROB,
+        "rule_hits": int(rule_hits.sum()),
+        "predictions_added": int(added.sum()),
+        "rule": (
+            "Set pred_bilgi_paylasimi=1 when prob_bilgi_paylasimi >= 0.20 and text has "
+            "a strong missing-news / info-request / contact / announcement signal."
+        ),
+        "validation_artifact": "data/analysis/postprocess_info_v1_validation_2026_05_17.md",
+    }
 
 
 def _load_label_cols(model_dir: Path, labels_json: Optional[str]) -> List[str]:
@@ -116,6 +190,12 @@ def main() -> int:
     p.add_argument("--batch-size", type=int, default=32, help="Batch size for inference.")
     p.add_argument("--prob-digits", type=int, default=4, help="Round probabilities to N decimals (default: 4).")
     p.add_argument(
+        "--postprocess-profile",
+        choices=["info_v1", "none"],
+        default="info_v1",
+        help="Optional validated postprocess layer. Use 'none' for exact raw threshold behavior.",
+    )
+    p.add_argument(
         "--dedup-by-id",
         action=argparse.BooleanOptionalAction,
         default=True,
@@ -174,6 +254,7 @@ def main() -> int:
         "threshold_global": float(args.threshold),
         "max_length": int(args.max_length),
         "batch_size": int(args.batch_size),
+        "postprocess_profile": str(args.postprocess_profile),
     }
 
     if args.prep_only:
@@ -214,6 +295,14 @@ def main() -> int:
 
     thr_vec = np.array([thresholds_used[lab] for lab in label_cols], dtype=np.float32).reshape(1, -1)
     y_pred = (probs >= thr_vec).astype(np.int64)
+    y_pred, post_meta = _apply_postprocess_profile(
+        profile=str(args.postprocess_profile),
+        texts=texts,
+        label_cols=label_cols,
+        probs=probs,
+        y_pred=y_pred,
+    )
+    meta["postprocess"] = post_meta
 
     # Output: keep base cols + prob_* + pred_*
     out_df = df.copy()
