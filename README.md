@@ -36,8 +36,7 @@ afetYonetimi_colab/
 │   └── need_classifier_v2/   # release-ready paket (pointer-based)
 ├── docs/                 # rasyonel dokümanları, teknik özet
 ├── colab/                # Colab eğitim rehberi
-├── requirements_modeling.txt
-└── requirements_dashboard.txt  # dashboard *niyeti*; dashboard kodu yok
+└── requirements_modeling.txt
 ```
 
 ## Canonical uçtan-uca zincir
@@ -105,20 +104,14 @@ Aynı komutların bash versiyonu: `release/need_classifier_v2/examples/predict_c
 
 ## Historical / non-canonical artifact notu
 
-Aşağıdaki dosyalar canonical **değildir**; referans/audit amaçlı tutuluyor. Yeni analiz ya da
-tüketim yazarken bunları kullanmayın:
+Eski paralel model dizinleri, contaminated/v1 karşılaştırma raporları ve
+superseded tahmin CSV'leri yerel klasörden kaldırıldı. Güncel tüketim ve
+dashboard için yalnızca canonical v2 final çıktıları kullanılmalıdır:
 
-| non-canonical artifact | neden |
-|---|---|
-| `data/analysis/experiment_comparison_v1_historical.*` | v1 önizleme karşılaştırması |
-| `data/analysis/experiment_comparison_v2.*` | **CONTAMINATED** — silver pool gold'un 1934/1934 id'sini içeriyordu; leak-free değil |
-| `models/final/selection_historical_v1_gold_combined_weighted.json` | v1 önizleme seçimi (F1-macro=0.309, rare labels F1=0) |
-| `data/predictions/need_predictions_geolocated_63k.csv` | v0 ilk tahmin, canonical değil |
-| `data/predictions/need_predictions_geolocated_gold_combined_weighted.csv` | v1a ara çıktı |
-| `data/predictions/need_predictions_geolocated_v1_gold_combined_weighted.csv` | v1 ilk canonical; bu v2 onu supersede ediyor |
-| `models/need_classification*/` | v1/v2 eğitim dizinleri, `exp3_silver_then_gold_v3_exgold` tarafından supersede ediliyor |
-
-Canonical referanslar `models/final/selection.json` içindeki `deprecated_artifacts` bloğu ile tutulur.
+- `models/final/selection.json`
+- `models/exp3_silver_then_gold_v3_exgold/final/`
+- `data/predictions/need_predictions_geolocated_v2_final.csv`
+- `data/predictions/need_predictions_geolocated_v2_final.meta.json`
 
 ## Önemli notlar ve bilinen sınırlamalar
 
@@ -138,9 +131,9 @@ Canonical referanslar `models/final/selection.json` içindeki `deprecated_artifa
 - **Havuz prior'ı**: `emergency_geolocated_96k.csv` "acil yardım + konum" filtresinden geçmiş
   tweet'ler içerir; bu yüzden tahmin çıktısında `arama_kurtarma` oranı %62.83 — over-fire değil,
   prior match.
-- **`requirements_dashboard.txt` mevcut, ancak bu repoda tamamlanmış bir dashboard/API kodu
-  bulunmaz.** Step 13 consumer entegrasyonu `not_applicable`. Bir tüketici kendi adapter'ını
-  yazmak zorunda; `release/need_classifier_v2/examples/adapter_snippet.py` minimal referans verir.
+- **Dashboard/API kodu bu modelleme reposunda tutulmaz.** Aktif Streamlit dashboard
+  ayrı `afetYonetimi-dashboard` klasöründedir; model tüketicileri için minimal adapter:
+  `release/need_classifier_v2/examples/adapter_snippet.py`.
 
 ## Dokümantasyon
 

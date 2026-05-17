@@ -63,15 +63,6 @@
     "guvenlik ve bilgi_paylasimi icin CV esikleri production'da recall feda ediyor; ihtiyac halinde ayri bir `threshold_production.json` tasarlanabilir (bu step 9 kapsami disinda).",
     "Silver havuzu id-seviyesinde leak-free, icerik-seviyesinde degil: test rows'un ~%18'inde silver'daki baska id'de ayni normalize metin bulundu (muhtemelen retweet/alinti). Bu riski content_overlap_audit_v2_leakfree ile olctuk ama duzeltme step 10'da ele alinacak."
   ],
-  "deprecated_artifacts": {
-    "historical_comparison": "data/analysis/experiment_comparison_v2.*  (CONTAMINATED - silver pool gold'un 1934 id'sinin tamamini iceriyordu; kullanmayin)",
-    "historical_selection": "models/final/selection_historical_v1_gold_combined_weighted.json  (preview v1; F1-macro=0.309, rare labels F1=0)",
-    "historical_predictions": [
-      "data/predictions/need_predictions_geolocated_63k.csv",
-      "data/predictions/need_predictions_geolocated_gold_combined_weighted.csv",
-      "data/predictions/need_predictions_geolocated_v1_gold_combined_weighted.csv"
-    ]
-  },
   "canonical_prediction_output": {
     "csv": "data/predictions/need_predictions_geolocated_v2_final.csv",
     "meta": "data/predictions/need_predictions_geolocated_v2_final.meta.json"

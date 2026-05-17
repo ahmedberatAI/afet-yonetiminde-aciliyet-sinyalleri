@@ -82,11 +82,6 @@
     "predict_script_sha1_head": "62b5a3df7c4b81db5b491a6211f39dda39afff64"
   },
   "canonical": true,
-  "supersedes": [
-    "data/predictions/need_predictions_geolocated_63k.csv",
-    "data/predictions/need_predictions_geolocated_gold_combined_weighted.csv",
-    "data/predictions/need_predictions_geolocated_v1_gold_combined_weighted.csv"
-  ],
   "threshold_global_fallback": 0.5,
   "prediction_columns": [
     "pred_arama_kurtarma",

@@ -113,11 +113,6 @@ def main() -> int:
         "predict_script_sha1_head": _sha1_of_file(predict_script),
     }
     enriched["canonical"] = True
-    enriched["supersedes"] = [
-        "data/predictions/need_predictions_geolocated_63k.csv",
-        "data/predictions/need_predictions_geolocated_gold_combined_weighted.csv",
-        "data/predictions/need_predictions_geolocated_v1_gold_combined_weighted.csv",
-    ]
 
     # Rename threshold_global -> threshold_global_fallback so readers can't misread it.
     if "threshold_global" in enriched:

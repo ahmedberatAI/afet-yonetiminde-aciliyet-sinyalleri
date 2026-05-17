@@ -16,12 +16,12 @@ JSON, this script produces:
 
 Usage:
     python scripts/error_analysis.py \
-        --model-dir models/exp2_gold_v2_posw/final \
+        --model-dir models/exp3_silver_then_gold_v3_exgold/final \
         --test-csv data/modeling/need_classification_gold_combined/test.csv \
-        --labels-json models/exp2_gold_v2_posw/label_columns.json \
-        --thresholds-json models/exp2_gold_v2_posw/thresholds_cv.json \
-        --out-md data/analysis/error_analysis_exp2.md \
-        --out-json data/analysis/error_analysis_exp2.json \
+        --labels-json models/exp3_silver_then_gold_v3_exgold/label_columns.json \
+        --thresholds-json models/exp3_silver_then_gold_v3_exgold/thresholds_cv.json \
+        --out-md data/analysis/error_analysis_v2_leakfree.md \
+        --out-json data/analysis/error_analysis_v2_leakfree.json \
         --top-n 10
 """
 

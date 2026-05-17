@@ -121,8 +121,8 @@ Islem:
   - `pred_any_need`
 
 Cikti:
-- `data/predictions/need_predictions_geolocated_63k.csv`
-- `data/predictions/need_predictions_geolocated_63k.meta.json`
+- `data/predictions/need_predictions_geolocated_v2_final.csv`
+- `data/predictions/need_predictions_geolocated_v2_final.meta.json`
 
 ## 7. Karar Mekanizmasi (Matematiksel Ozet)
 
@@ -137,16 +137,18 @@ Karar:
 - Eger `p_i >= t_i` ise etiket `1`
 - Eger `p_i < t_i` ise etiket `0`
 
-Burada `t_i`, ilgili etiketin tuned threshold degeridir (`thresholds.json`).
+Burada `t_i`, ilgili etiketin CV-tuned threshold degeridir
+(`models/exp3_silver_then_gold_v3_exgold/thresholds_cv.json`).
 
 ## 8. Nihai Modeli Aciklarken Gosterilecek Minimum Dosyalar
 
 1. `scripts/train_need_classifier.py`
-2. `scripts/tune_thresholds.py`
+2. `scripts/tune_thresholds_cv.py`
 3. `scripts/evaluate_need_classifier.py`
 4. `scripts/predict_need_classifier.py`
-5. `data/modeling/need_classification_silver_63k/training_config.yaml`
-6. `models/need_classification_silver_63k/final/config.json`
-7. `models/need_classification_silver_63k/thresholds.json`
-8. `models/need_classification_silver_63k/eval_test_tuned.json`
-9. `data/predictions/need_predictions_geolocated_63k.meta.json`
+5. `data/modeling/experiments/exp3_silver_then_gold_v3_exgold.yaml`
+6. `models/final/selection.json`
+7. `models/exp3_silver_then_gold_v3_exgold/final/config.json`
+8. `models/exp3_silver_then_gold_v3_exgold/thresholds_cv.json`
+9. `models/exp3_silver_then_gold_v3_exgold/eval_test_tuned.json`
+10. `data/predictions/need_predictions_geolocated_v2_final.meta.json`

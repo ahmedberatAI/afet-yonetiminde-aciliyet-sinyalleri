@@ -5,10 +5,11 @@ predictions for dashboarding.
 
 Typical use (Colab / Drive):
   python scripts/predict_need_classifier.py \
-    --model-dir models/need_classification_silver_63k/final \
+    --model-dir models/exp3_silver_then_gold_v3_exgold/final \
+    --labels-json models/exp3_silver_then_gold_v3_exgold/label_columns.json \
     --input data/processed/emergency_geolocated_96k.csv \
-    --thresholds-json models/need_classification_silver_63k/thresholds.json \
-    --output data/predictions/need_predictions_geolocated_63k.csv \
+    --thresholds-json models/exp3_silver_then_gold_v3_exgold/thresholds_cv.json \
+    --output data/predictions/need_predictions_geolocated_v2_final.csv \
     --dedup-by-id
 
 Notes:
@@ -242,4 +243,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
